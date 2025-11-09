@@ -1,0 +1,37 @@
+{
+  "city": "city name",
+  "type_of_document": "PLU, DG, etc.",
+  "zonage": "zonage of the source document",
+  "zone": "zone name",
+  "document": {
+    "pages": [
+      {
+        "page_number": "page_number",
+        "text": "content",
+        "images": {
+          "img_name": "img_name",
+          "top_left_x": "top_left_x",
+          "top_left_y": "top_left_y",
+          "bottom_right_x": "bottom_right_x",
+          "bottom_right_y": "bottom_right_y",
+          "image_base64": "image_base64"
+        }
+      }
+    ],
+    "dimensions": {
+      "dpi": "dpi",
+      "width": "width",
+      "height": "height"
+    }
+  },
+  "metadata": {
+    "model_used": "model used for the OCR",
+    "input_tokens": 100,
+    "output_tokens": 100,
+    "total_cost": 0.0002,
+    "date_of_document": "date of publication of the source document",
+    "date_of_ocr": "date of OCR of the source document",
+    "name_of_document": "name of the source document",
+    "number_of_pages": 12
+  }
+}
