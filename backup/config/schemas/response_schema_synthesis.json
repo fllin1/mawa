@@ -1,0 +1,488 @@
+{
+  "type": "object",
+  "properties": {
+    "1 - CONSTRUCTIONS, USAGES ET AFFECTATIONS DES SOLS, ACTIVITÉS ET INSTALLATIONS INTERDITS ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "1.1. CONSTRUCTIONS INTERDITES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "1.2. USAGES ET AFFECTATIONS DES SOLS INTERDITS ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "1.3. ACTIVITÉS ET INSTALLATIONS INTERDITES": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "1.1. CONSTRUCTIONS INTERDITES ",
+          "1.2. USAGES ET AFFECTATIONS DES SOLS INTERDITS ",
+          "1.3. ACTIVITÉS ET INSTALLATIONS INTERDITES"
+        ]
+      }
+    },
+    "2 - CONSTRUCTIONS, USAGES ET AFFECTATIONS DES SOLS, ACTIVITÉS ET INSTALLATIONS SOUMISES À CONDITIONS PARTICULIÈRES ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "2.1. CONSTRUCTIONS SOUMISES À DES CONDITIONS PARTICULIÈRES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "2.2. USAGES ET AFFECTATIONS DES SOLS SOUMIS À DES CONDITIONS PARTICULIÈRES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "2.3. ACTIVITÉS ET INSTALLATIONS SOUMISES À DES CONDITIONS PARTICULIÈRES": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "2.1. CONSTRUCTIONS SOUMISES À DES CONDITIONS PARTICULIÈRES ",
+          "2.2. USAGES ET AFFECTATIONS DES SOLS SOUMIS À DES CONDITIONS PARTICULIÈRES ",
+          "2.3. ACTIVITÉS ET INSTALLATIONS SOUMISES À DES CONDITIONS PARTICULIÈRES"
+        ]
+      }
+    },
+    "3 - MIXITÉ FONCTIONNELLE ET SOCIALE ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "3.1. DISPOSITIONS EN FAVEUR DE LA MIXITÉ COMMERCIALE ET FONCTIONNELLE": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "3.2. RÈGLES DIFFÉRENCIÉES ENTRE REZ-DE-CHAUSSÉE ET ÉTAGES SUPÉRIEURS ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "3.3. DISPOSITIONS EN FAVEUR DE LA MIXITÉ SOCIALE": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "3.1. DISPOSITIONS EN FAVEUR DE LA MIXITÉ COMMERCIALE ET FONCTIONNELLE",
+          "3.2. RÈGLES DIFFÉRENCIÉES ENTRE REZ-DE-CHAUSSÉE ET ÉTAGES SUPÉRIEURS ",
+          "3.3. DISPOSITIONS EN FAVEUR DE LA MIXITÉ SOCIALE"
+        ]
+      }
+    },
+    "4 - IMPLANTATION ET VOLUMÉTRIE DES CONSTRUCTIONS ET DES INSTALLATIONS ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "4.1. IMPLANTATION PAR RAPPORT AUX VOIES ET EMPRISES PUBLIQUES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "4.2. IMPLANTATION DES CONSTRUCTIONS PAR RAPPORT AUX LIMITES SÉPARATIVES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "4.3. IMPLANTATION DES CONSTRUCTIONS LES UNES PAR RAPPORT AUX AUTRES SUR UNE MÊME PROPRIÉTÉ ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "4.4. EMPRISE AU SOL DES CONSTRUCTIONS ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "4.5. COEFFICIENT D'EMPRISE AU SOL MINIMUM ET HAUTEUR MINIMUM AU SEIN DES PÉRIMÈTRES D'INTENSIFICATION URBAINE ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "4.6. HAUTEUR DES CONSTRUCTIONS ET DES INSTALLATIONS": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "4.1. IMPLANTATION PAR RAPPORT AUX VOIES ET EMPRISES PUBLIQUES ",
+          "4.2. IMPLANTATION DES CONSTRUCTIONS PAR RAPPORT AUX LIMITES SÉPARATIVES ",
+          "4.3. IMPLANTATION DES CONSTRUCTIONS LES UNES PAR RAPPORT AUX AUTRES SUR UNE MÊME PROPRIÉTÉ ",
+          "4.4. EMPRISE AU SOL DES CONSTRUCTIONS ",
+          "4.5. COEFFICIENT D'EMPRISE AU SOL MINIMUM ET HAUTEUR MINIMUM AU SEIN DES PÉRIMÈTRES D'INTENSIFICATION URBAINE ",
+          "4.6. HAUTEUR DES CONSTRUCTIONS ET DES INSTALLATIONS"
+        ]
+      }
+    },
+    "5 - QUALITÉ URBAINE, ARCHITECTURALE, ENVIRONNEMENTALE ET PAYSAGÈRE": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "5.1. INSERTION DES CONSTRUCTIONS ET DES INSTALLATIONS DANS LEUR ENVIRONNEMENT ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "5.2. CARACTÉRISTIQUES ARCHITECTURALES DES FAÇADES ET TOITURES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "5.3. CARACTÉRISTIQUES DES CLÔTURES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "5.4. PRESCRIPTIONS RELATIVES AU PATRIMOINE BÂTI ET PAYSAGER À PROTÉGER, À CONSERVER, À RESTAURER, À METTRE EN VALEUR OU À REQUALIFIER": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "5.1. INSERTION DES CONSTRUCTIONS ET DES INSTALLATIONS DANS LEUR ENVIRONNEMENT ",
+          "5.2. CARACTÉRISTIQUES ARCHITECTURALES DES FAÇADES ET TOITURES ",
+          "5.3. CARACTÉRISTIQUES DES CLÔTURES ",
+          "5.4. PRESCRIPTIONS RELATIVES AU PATRIMOINE BÂTI ET PAYSAGER À PROTÉGER, À CONSERVER, À RESTAURER, À METTRE EN VALEUR OU À REQUALIFIER"
+        ]
+      }
+    },
+    "6 - TRAITEMENT ENVIRONNEMENTAL ET PAYSAGER DES ESPACES NON BÂTIS, DES CONSTRUCTIONS ET DE LEURS ABORDS ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "6.1. OBLIGATIONS EN MATIÈRE DE RÉALISATION D'ESPACES LIBRES ET DE PLANTATIONS, D'AIRES DE JEUX ET DE LOISIRS ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "6.2. SURFACES VÉGÉTALISÉES OU PERMÉABLES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "6.3. MAINTIEN OU REMISE EN ÉTAT DES CONTINUITÉS ÉCOLOGIQUES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "6.4. GESTION DES EAUX PLUVIALES ET DU RUISSELLEMENT ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "6.5. AMÉNAGEMENT D'EMPLACEMENTS SPÉCIFIQUES DÉDIÉS À LA COLLECTE DES DÉCHETS MÉNAGERS ET ASSIMILÉS": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "6.1. OBLIGATIONS EN MATIÈRE DE RÉALISATION D'ESPACES LIBRES ET DE PLANTATIONS, D'AIRES DE JEUX ET DE LOISIRS ",
+          "6.2. SURFACES VÉGÉTALISÉES OU PERMÉABLES ",
+          "6.3. MAINTIEN OU REMISE EN ÉTAT DES CONTINUITÉS ÉCOLOGIQUES ",
+          "6.4. GESTION DES EAUX PLUVIALES ET DU RUISSELLEMENT ",
+          "6.5. AMÉNAGEMENT D'EMPLACEMENTS SPÉCIFIQUES DÉDIÉS À LA COLLECTE DES DÉCHETS MÉNAGERS ET ASSIMILÉS"
+        ]
+      }
+    },
+    "7 - STATIONNEMENT ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "7.1. STATIONNEMENT DES VÉHICULES MOTORISÉS ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "7.2. STATIONNEMENT DES CYCLES": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "7.1. STATIONNEMENT DES VÉHICULES MOTORISÉS ",
+          "7.2. STATIONNEMENT DES CYCLES"
+        ]
+      }
+    },
+    "8 - DESSERTE PAR LES VOIES PUBLIQUES ET PRIVÉES ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "8.1. ACCÈS ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "8.2. VOIRIES": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": ["8.1. ACCÈS ", "8.2. VOIRIES"]
+      }
+    },
+    "9 - DESSERTE PAR LES RÉSEAUX ": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "9.1. ALIMENTATION EN EAU POTABLE ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "9.2. GESTION DES EAUX USÉES DOMESTIQUES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "9.3. GESTION DES EAUX USÉES NON DOMESTIQUE ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "9.4. UTILISATION DU RÉSEAU D'EAUX PLUVIALES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "9.5. RÉSEAUX ÉLECTRIQUES ET TÉLÉPHONIQUES ": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          },
+          "9.6. DÉPLOIEMENT DE LA FIBRE OPTIQUE": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "source_page": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "required": [
+          "9.1. ALIMENTATION EN EAU POTABLE ",
+          "9.2. GESTION DES EAUX USÉES DOMESTIQUES ",
+          "9.3. GESTION DES EAUX USÉES NON DOMESTIQUE ",
+          "9.4. UTILISATION DU RÉSEAU D'EAUX PLUVIALES ",
+          "9.5. RÉSEAUX ÉLECTRIQUES ET TÉLÉPHONIQUES ",
+          "9.6. DÉPLOIEMENT DE LA FIBRE OPTIQUE"
+        ]
+      }
+    },
+    "10 - ENERGIE ET PERFORMANCES ÉNERGÉTIQUES": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "content": { "type": "string" },
+          "source_page": { "type": "integer" }
+        }
+      }
+    }
+  },
+  "required": [
+    "1 - CONSTRUCTIONS, USAGES ET AFFECTATIONS DES SOLS, ACTIVITÉS ET INSTALLATIONS INTERDITS ",
+    "2 - CONSTRUCTIONS, USAGES ET AFFECTATIONS DES SOLS, ACTIVITÉS ET INSTALLATIONS SOUMISES À CONDITIONS PARTICULIÈRES ",
+    "3 - MIXITÉ FONCTIONNELLE ET SOCIALE ",
+    "4 - IMPLANTATION ET VOLUMÉTRIE DES CONSTRUCTIONS ET DES INSTALLATIONS ",
+    "5 - QUALITÉ URBAINE, ARCHITECTURALE, ENVIRONNEMENTALE ET PAYSAGÈRE",
+    "6 - TRAITEMENT ENVIRONNEMENTAL ET PAYSAGER DES ESPACES NON BÂTIS, DES CONSTRUCTIONS ET DE LEURS ABORDS ",
+    "7 - STATIONNEMENT ",
+    "8 - DESSERTE PAR LES VOIES PUBLIQUES ET PRIVÉES ",
+    "9 - DESSERTE PAR LES RÉSEAUX ",
+    "10 - ENERGIE ET PERFORMANCES ÉNERGÉTIQUES"
+  ]
+}

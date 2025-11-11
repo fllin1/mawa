@@ -1,0 +1,330 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Extraction Structurée de Règles de PLU",
+  "description": "Structure de données standardisée pour les règles d'urbanisme extraites d'un document de PLU, pour une zone spécifique. Les descriptions fournissent le contexte.",
+  "type": "object",
+  "properties": {
+    "chapitre_1": {
+      "description": "1 - CONSTRUCTIONS, USAGES ET AFFECTATIONS DES SOLS, ACTIVITÉS ET INSTALLATIONS INTERDITS",
+      "type": "object",
+      "properties": {
+        "section_1_1": {
+          "description": "1.1. CONSTRUCTIONS INTERDITES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_1_2": {
+          "description": "1.2. USAGES ET AFFECTATIONS DES SOLS INTERDITS",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_1_3": {
+          "description": "1.3. ACTIVITÉS ET INSTALLATIONS INTERDITES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_2": {
+      "description": "2 - CONSTRUCTIONS, USAGES ET AFFECTATIONS DES SOLS, ACTIVITÉS ET INSTALLATIONS SOUMISES À CONDITIONS PARTICULIÈRES",
+      "type": "object",
+      "properties": {
+        "section_2_1": {
+          "description": "2.1. CONSTRUCTIONS SOUMISES À DES CONDITIONS PARTICULIÈRES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_2_2": {
+          "description": "2.2. USAGES ET AFFECTATIONS DES SOLS SOUMIS À DES CONDITIONS PARTICULIÈRES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_2_3": {
+          "description": "2.3. ACTIVITÉS ET INSTALLATIONS SOUMISES À DES CONDITIONS PARTICULIÈRES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_3": {
+      "description": "3 - MIXITÉ FONCTIONNELLE ET SOCIALE",
+      "type": "object",
+      "properties": {
+        "section_3_1": {
+          "description": "3.1. DISPOSITIONS EN FAVEUR DE LA MIXITÉ COMMERCIALE ET FONCTIONNELLE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_3_2": {
+          "description": "3.2. RÈGLES DIFFÉRENCIÉES ENTRE REZ-DE-CHAUSSÉE ET ÉTAGES SUPÉRIEURS",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_3_3": {
+          "description": "3.3. DISPOSITIONS EN FAVEUR DE LA MIXITÉ SOCIALE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_4": {
+      "description": "4 - IMPLANTATION ET VOLUMÉTRIE DES CONSTRUCTIONS ET DES INSTALLATIONS",
+      "type": "object",
+      "properties": {
+        "section_4_1": {
+          "description": "4.1. IMPLANTATION PAR RAPPORT AUX VOIES ET EMPRISES PUBLIQUES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_4_2": {
+          "description": "4.2. IMPLANTATION DES CONSTRUCTIONS PAR RAPPORT AUX LIMITES SÉPARATIVES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_4_3": {
+          "description": "4.3. IMPLANTATION DES CONSTRUCTIONS LES UNES PAR RAPPORT AUX AUTRES SUR UNE MÊME PROPRIÉTÉ",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_4_4": {
+          "description": "4.4. EMPRISE AU SOL DES CONSTRUCTIONS",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_4_5": {
+          "description": "4.5. COEFFICIENT D'EMPRISE AU SOL MINIMUM ET HAUTEUR MINIMUM AU SEIN DES PÉRIMÈTRES D'INTENSIFICATION URBAINE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_4_6": {
+          "description": "4.6. HAUTEUR DES CONSTRUCTIONS ET DES INSTALLATIONS",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_5": {
+      "description": "5 - QUALITÉ URBAINE, ARCHITECTURALE, ENVIRONNEMENTALE ET PAYSAGÈRE",
+      "type": "object",
+      "properties": {
+        "section_5_1": {
+          "description": "5.1. INSERTION DES CONSTRUCTIONS ET DES INSTALLATIONS DANS LEUR ENVIRONNEMENT",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_5_2": {
+          "description": "5.2. CARACTÉRISTIQUES ARCHITECTURALES DES FAÇADES ET TOITURES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_5_3": {
+          "description": "5.3. CARACTÉRISTIQUES DES CLÔTURES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_5_4": {
+          "description": "5.4. PRESCRIPTIONS RELATIVES AU PATRIMOINE BÂTI ET PAYSAGER À PROTÉGER...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_6": {
+      "description": "6 - TRAITEMENT ENVIRONNEMENTAL ET PAYSAGER DES ESPACES NON BÂTIS...",
+      "type": "object",
+      "properties": {
+        "section_6_1": {
+          "description": "6.1. OBLIGATIONS EN MATIÈRE DE RÉALISATION D'ESPACES LIBRES ET DE PLANTATIONS...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_6_2": {
+          "description": "6.2. SURFACES VÉGÉTALISÉES OU PERMÉABLES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_6_3": {
+          "description": "6.3. MAINTIEN OU REMISE EN ÉTAT DES CONTINUITÉS ÉCOLOGIQUES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_6_4": {
+          "description": "6.4. GESTION DES EAUX PLUVIALES ET DU RUISSELLEMENT",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_6_5": {
+          "description": "6.5. AMÉNAGEMENT D'EMPLACEMENTS SPÉCIFIQUES DÉDIÉS À LA COLLECTE DES DÉCHETS...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_7": {
+      "description": "7 - STATIONNEMENT",
+      "type": "object",
+      "properties": {
+        "section_7_1": {
+          "description": "7.1. STATIONNEMENT DES VÉHICULES MOTORISÉS",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_7_2": {
+          "description": "7.2. STATIONNEMENT DES CYCLES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_8": {
+      "description": "8 - DESSERTE PAR LES VOIES PUBLIQUES ET PRIVÉES",
+      "type": "object",
+      "properties": {
+        "section_8_1": {
+          "description": "8.1. ACCÈS",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_8_2": {
+          "description": "8.2. VOIRIES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_9": {
+      "description": "9 - DESSERTE PAR LES RÉSEAUX",
+      "type": "object",
+      "properties": {
+        "section_9_1": {
+          "description": "9.1. ALIMENTATION EN EAU POTABLE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_9_2": {
+          "description": "9.2. GESTION DES EAUX USÉES DOMESTIQUES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_9_3": {
+          "description": "9.3. GESTION DES EAUX USÉES NON DOMESTIQUE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_9_4": {
+          "description": "9.4. UTILISATION DU RÉSEAU D'EAUX PLUVIALES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_9_5": {
+          "description": "9.5. RÉSEAUX ÉLECTRIQUES ET TÉLÉPHONIQUES",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        },
+        "section_9_6": {
+          "description": "9.6. DÉPLOIEMENT DE LA FIBRE OPTIQUE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    },
+    "chapitre_10": {
+      "description": "10 - ENERGIE ET PERFORMANCES ÉNERGÉTIQUES",
+      "type": "object",
+      "properties": {
+        "section_10_1": {
+          "description": "10.1. RÈGLES GÉNÉRALES SUR L'ÉNERGIE",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Regle"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Regle": {
+      "type": "object",
+      "properties": {
+        "contenu": {
+          "type": "string",
+          "description": "Synthèse concise de la règle (valeur, obligation, interdiction)."
+        },
+        "source_ref": {
+          "type": "string",
+          "description": "Référence de la source au format '{ORIGINE}, Page {P}.{N°}'.",
+          "pattern": "^(PLU|DG), Page \\d+\\.\\d+$"
+        }
+      },
+      "required": ["contenu", "source_ref"]
+    }
+  }
+}

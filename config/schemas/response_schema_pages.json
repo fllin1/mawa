@@ -1,0 +1,22 @@
+{
+  "type": "ARRAY",
+  "items": {
+    "type": "OBJECT",
+    "properties": {
+      "zoning": {
+        "type": "STRING",
+        "description": "Le noms des catégories générales de la zones (Exemples : Zones Urbaines, Zones À Urbaniser, Zones Agricoles, Zones Naturelles et Forestières, Zones Spécifiques)"
+      },
+      "zone": {
+        "type": "STRING",
+        "description": "Le code officiel de la zone (Exemples : UA, UB, UC, 1AU, 2AU, A, Ap, N, Nh, etc.)"
+      },
+      "pages": {
+        "type": "ARRAY",
+        "items": {
+          "type": "INTEGER"
+        }
+      }
+    }
+  }
+}
