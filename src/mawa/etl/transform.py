@@ -1,8 +1,5 @@
 from pathlib import Path
-import json
 from typing import Optional, Tuple
-
-from google.genai.types import GenerateContentResponse
 
 from mawa.config import CONFIG_DIR, INTERIM_DATA_DIR, OCR_DATA_DIR
 from mawa.models.gemini_model import GeminiModel
@@ -42,9 +39,26 @@ def transform_function(
     )
 
     json_response = response.model_dump()
-    save_json(json_response, save_file_path)
+    page_split_path = save_file_path.with_suffix(".page_split.json")
+    save_json(json_response, page_split_path)
 
-    return save_file_path
+    for page_split in json_response["parsed"]:
+        zoning = page_split["zoning"]
+        zone = page_split["zone"]
+        pages = page_split["pages"]
+
+        doc_zone = document.model_copy(
+            update={
+                "pages": [document.pages[page - 1] for page in pages],
+                "zoning": zoning,
+                "zone": zone,
+            }
+        )
+        save_json(
+            doc_zone.model_dump(), save_file_path.parent / zoning / f"{zone}.json"
+        )
+
+    return page_split_path
 
 
 def _generate_prompt_parts(document: Document) -> Tuple[str, list[str], dict]:

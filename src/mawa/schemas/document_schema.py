@@ -17,9 +17,14 @@ class Dimensions(BaseModel):
     height: int
 
 
+class Paragraph(BaseModel):
+    index: int
+    content: str
+
+
 class Page(BaseModel):
     index: int
-    markdown: str
+    paragraphs: list[Paragraph]
     images: list[Image]
     dimensions: Dimensions
 

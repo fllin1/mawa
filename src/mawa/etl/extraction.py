@@ -2,9 +2,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional
 
-from mawa.config import OCR_DATA_DIR
+from mawa.config import OCR_DATA_DIR, City
 from mawa.models.mistral_ocr import MistralOCR
-from mawa.schemas.document_schema import Document, Page
+from mawa.schemas.document_schema import Document, Page, Paragraph
 from mawa.utils import save_json
 
 
@@ -37,18 +37,48 @@ def extraction_function(
     # Checkpoint save the raw OCR response
     save_json(json_data, save_file_path)
 
-    pages = []
-    for page in ocr_response["pages"]:
-        page["index"] += 1
-        pages.append(Page(**page))
+    document = _format_ocr_response(json_data, file_path, document_type, zonage, zone)
+
+    # Overwrite the raw OCR response with the formatted document
+    save_json(document.model_dump(), save_file_path)
+    return save_file_path
+
+
+def _format_ocr_response(
+    ocr_response: dict,
+    file_path: Path,
+    document_type: Literal["PLU", "DG", "PLU_AND_DG"],
+    zonage: Optional[str] = None,
+    zone: Optional[str] = None,
+) -> Document:
+    """Format the OCR response into a Document schema"""
+    pages: list[Page] = []
+    for index, page in enumerate(ocr_response["pages"]):
+        paragraphs: list[Paragraph] = []
+        for sub_index, paragraph in enumerate(page["markdown"].split("\n\n")):
+            paragraphs.append(Paragraph(index=sub_index + 1, content=paragraph))
+        pages.append(
+            Page(
+                index=index + 1,
+                paragraphs=paragraphs,
+                images=page["images"],
+                dimensions=page["dimensions"],
+            )
+        )
 
     usage_info = ocr_response.get("usage_info", {})
+    name_of_document = file_path.stem
+    date_of_document = file_path.parent.name
+    assert datetime.strptime(date_of_document, "%Y-%m-%d")
+    city = file_path.parent.parent.name
+    assert city in City
+
     document = Document(
         pages=pages,
-        name_of_document=file_path.stem,
-        date_of_document=file_path.parent.name,
+        name_of_document=name_of_document,
+        date_of_document=date_of_document,
         document_type=document_type,
-        city=file_path.parent.parent.name,
+        city=city,
         zonage=zonage,
         zone=zone,
         date_of_ocr=datetime.now().strftime("%Y-%m-%d"),
@@ -59,7 +89,4 @@ def extraction_function(
             "document_annotation": ocr_response.get("document_annotation", {}),
         },
     )
-
-    # Overwrite the raw OCR response with the formatted document
-    save_json(document.model_dump(), save_file_path)
-    return save_file_path
+    return document
