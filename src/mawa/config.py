@@ -6,11 +6,12 @@ import enum
 ROOT_DIR = Path(__file__).resolve().parents[2]
 
 DATA_DIR = ROOT_DIR / "data"
-RAW_DATA_DIR = DATA_DIR / "1.raw"
+EXTERNAL_DATA_DIR = DATA_DIR / "1.external"
 OCR_DATA_DIR = DATA_DIR / "2.ocr"
-INTERIM_DATA_DIR = DATA_DIR / "3.interim"
-PROMPT_DATA_DIR = DATA_DIR / "4.prompt"
-ANALYSIS_DATA_DIR = DATA_DIR / "5.analysis"
+RAW_DATA_DIR = DATA_DIR / "3.raw"
+INTERIM_DATA_DIR = DATA_DIR / "4.interim"
+PROMPT_DATA_DIR = DATA_DIR / "5.prompt"
+ANALYSIS_DATA_DIR = DATA_DIR / "6.analysis"
 
 CONFIG_DIR = ROOT_DIR / "config"
 

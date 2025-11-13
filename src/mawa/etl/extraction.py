@@ -2,10 +2,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional
 
-from mawa.config import OCR_DATA_DIR, City, RAW_DATA_DIR
+from mawa.config import OCR_DATA_DIR, City
 from mawa.models.mistral_ocr import MistralOCR
-from mawa.schemas.document_schema import Document, Page, Paragraph
-from mawa.utils import read_data_tree, read_json, save_json
+from mawa.utils import read_data_tree, save_json
 
 
 class Extraction:
@@ -31,9 +30,9 @@ class Extraction:
         self.city = city
         self.doc_type = doc_type
 
-        self.data_tree_raw = read_data_tree("1.raw")[city.value]
+        self.data_tree_external = read_data_tree("1.external")[city.value]
         if date:
-            self.data_tree_raw = self.data_tree_raw[date]
+            self.data_tree_external = self.data_tree_external[date]
 
     def _find_raw_document_path(self, data_tree: dict) -> Path:
         """
@@ -58,7 +57,7 @@ class Extraction:
         Returns:
             Path: Path to the saved data
         """
-        raw_file_path = self._find_raw_document_path(self.data_tree_raw)
+        raw_file_path = self._find_raw_document_path(self.data_tree_external)
 
         mistral_ocr = MistralOCR()
         file_id = mistral_ocr.upload_file(raw_file_path)

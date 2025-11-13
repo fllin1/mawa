@@ -4,10 +4,11 @@ from typing import Literal, Optional
 
 from mawa.etl.extraction import Extraction
 from mawa.config import City
-from mawa.utils import read_data_tree
-from mawa.etl.transform import transform_function
+from mawa.etl.transform import Transform
 
-app = typer.Typer(help="CLI for text extraction from PDFs")
+app = typer.Typer(
+    help="CLI for text extraction from PDFs", pretty_exceptions_enable=False
+)
 
 
 @app.command("extract")
@@ -20,10 +21,10 @@ def extraction_command(
     """Extract text from a PDF file.
 
     Args:
-        city: The city of the document.
-        doc_name: The name of the document.
-        doc_type: The type of document.
-        step: The step to execute ("extract", "transform", or "all").
+        city (City): The city of the document.
+        doc_name (str): The name of the document.
+        doc_type (Literal["PLU", "DG", "PLU_AND_DG"]): The type of document.
+        date (Optional[str]): The date of the document.
     """
     extractor = Extraction(
         doc_name=doc_name,
@@ -41,25 +42,25 @@ def extraction_command(
 def transform_command(
     city: City,
     doc_name: str,
-    apply_extract_zones: Optional[bool] = True,
-) -> Path:
+    method: Literal["format", "clean", "find_split", "apply_split"],
+) -> None:
     """Formats the raw OCR output in a standard format
 
     Args:
         city (City): The city of the document
         doc_name (str): The name of the document
-        apply_extract_zones (bool): Whether to apply the extract zones prompt
-            In some cases, the document is already in the desired format
+        method (Literal["format", "clean", "find_split", "apply_split"]): The method to use for the transformation
     """
-    doc_name = Path(doc_name).with_suffix(".json").name
-    data_tree = read_data_tree("2.ocr")[city.value]
+    transformer = Transform(city, doc_name)
 
-    document = data_tree[doc_name]
-    doc_path = Path(document["file_path"])
-
-    save_path = transform_function(doc_path, apply_extract_zones)
-    typer.echo(f"Saved data to {save_path}")
-    return save_path
+    if method == "format":
+        transformer.ocr_response_to_document()
+    elif method == "clean":
+        transformer.clean_document()
+    elif method == "find_split":
+        transformer.pages_splitting()
+    elif method == "apply_split":
+        transformer.split_documents()
 
 
 if __name__ == "__main__":

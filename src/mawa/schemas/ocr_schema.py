@@ -1,22 +1,31 @@
 from pydantic import BaseModel
 from typing import Literal, Optional
-from mawa.schemas.ocr_schema import Image, Dimensions
 
 
-class Paragraph(BaseModel):
+class Image(BaseModel):
+    name_img: str
+    top_left_x: int
+    top_left_y: int
+    bottom_right_x: int
+    bottom_right_y: int
+    image_base64: str
+
+
+class Dimensions(BaseModel):
+    dpi: int
+    width: int
+    height: int
+
+
+class PageOCR(BaseModel):
     index: int
-    content: str
-
-
-class Page(BaseModel):
-    index: int
-    paragraphs: list[Paragraph]
+    markdown: str
     images: list[Image]
     dimensions: Dimensions
 
 
-class Document(BaseModel):
-    pages: list[Page]
+class DocumentOCR(BaseModel):
+    pages: list[PageOCR]
     name_of_document: str
     date_of_document: str
     document_type: Literal["PLU", "DG", "PLU_AND_DG"]

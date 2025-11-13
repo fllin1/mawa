@@ -9,7 +9,7 @@ Mawa is an urban document analysis pipeline. It currently only supports French P
 
 ## Installation
 
-This project requires [uv](https://docs.astral.sh/uv/guides/install-python/) and **Python>=3.13**.
+This project requires [uv](https://docs.astral.sh/uv/guides/install-python/) and **Python>=3.12**.
 
 Then simply run this few lines of code, and you're ready to go.
 
