@@ -2,7 +2,7 @@ from pathlib import Path
 import typer
 from typing import Literal, Optional
 
-from mawa.etl.extraction import extraction_function
+from mawa.etl.extraction import Extraction
 from mawa.config import City
 from mawa.utils import read_data_tree
 from mawa.etl.transform import transform_function
@@ -15,29 +15,26 @@ def extraction_command(
     city: City,
     doc_name: str,
     doc_type: Literal["PLU", "DG", "PLU_AND_DG"],
-    zonage: Optional[str] = None,
-    zone: Optional[str] = None,
+    date: Optional[str] = None,
 ) -> Path:
     """Extract text from a PDF file.
 
     Args:
         city: The city of the document.
         doc_name: The name of the document.
+        doc_type: The type of document.
+        step: The step to execute ("extract", "transform", or "all").
     """
-    city = city.value
-    doc_name = Path(doc_name).with_suffix(".pdf").name
-    data_tree = read_data_tree("1.raw")[city]
+    extractor = Extraction(
+        doc_name=doc_name,
+        city=city.value,
+        doc_type=doc_type,
+        date=date,
+    )
 
-    for documents in data_tree.values():
-        if doc_name not in documents:
-            continue
-        doc_path = Path(documents[doc_name]["file_path"])
-        save_path = extraction_function(doc_path, city, doc_type, zonage, zone)
-        typer.echo(f"Extracted text from {doc_path} to {save_path}")
-        return save_path
-
-    typer.echo(f"Error: Document {doc_name} not found in data tree", err=True)
-    raise typer.Exit(code=1)
+    file_path = extractor.extraction_function()
+    typer.echo(f"Extraction completed. OCR data saved to {file_path}")
+    return file_path
 
 
 @app.command("transform")
@@ -57,16 +54,12 @@ def transform_command(
     doc_name = Path(doc_name).with_suffix(".json").name
     data_tree = read_data_tree("2.ocr")[city.value]
 
-    for key, value in data_tree.items():
-        if doc_name != key:
-            continue
-        doc_path = Path(value["file_path"])
-        save_path = transform_function(doc_path, apply_extract_zones)
-        typer.echo(f"Saved data to {save_path}")
-        return save_path
+    document = data_tree[doc_name]
+    doc_path = Path(document["file_path"])
 
-    typer.echo(f"Error: Document {doc_name} not found in data tree", err=True)
-    raise typer.Exit(code=1)
+    save_path = transform_function(doc_path, apply_extract_zones)
+    typer.echo(f"Saved data to {save_path}")
+    return save_path
 
 
 if __name__ == "__main__":

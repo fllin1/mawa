@@ -37,5 +37,5 @@ class Document(BaseModel):
     city: str
     zoning: Optional[str] = None
     zone: Optional[str] = None
-    date_of_ocr: Optional[str] = None
+    modified_at: Optional[str] = None
     model_metadata: dict

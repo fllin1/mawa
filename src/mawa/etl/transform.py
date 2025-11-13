@@ -1,10 +1,61 @@
+from datetime import datetime
 from pathlib import Path
 from typing import Optional, Tuple
 
-from mawa.config import CONFIG_DIR, INTERIM_DATA_DIR, OCR_DATA_DIR
+from mawa.config import CONFIG_DIR, INTERIM_DATA_DIR, OCR_DATA_DIR, City
 from mawa.models.gemini_model import GeminiModel
-from mawa.schemas.document_schema import Document
+from mawa.schemas.document_schema import Document, Page, Paragraph
 from mawa.utils import read_json, save_json
+
+
+def format_ocr_response(doc_name: str, city: City) -> Path:
+    """Format the OCR response into a Document schema.
+
+    Returns:
+        Path: Path to the saved formatted document
+    """
+    doc_name = doc_name.with_suffix(".json")
+    file_path = OCR_DATA_DIR / city.value / doc_name
+    ocr_response = read_json(file_path)
+
+    pages: list[Page] = []
+
+    for index, page in enumerate(ocr_response["pages"]):
+        paragraphs: list[Paragraph] = []
+
+        for sub_index, paragraph in enumerate(page["markdown"].split("\n\n")):
+            paragraphs.append(Paragraph(index=sub_index + 1, content=paragraph))
+        pages.append(
+            Page(
+                index=index + 1,
+                paragraphs=paragraphs,
+                images=page["images"],
+                dimensions=page["dimensions"],
+            )
+        )
+
+    usage_info = ocr_response.get("usage_info", {})
+
+    document = Document(
+        pages=pages,
+        name_of_document=doc_name.stem,
+        date_of_document=ocr_response["date_of_document"],
+        document_type=ocr_response["document_type"],
+        city=city,
+        zonage=ocr_response.get("zonage", None),
+        zone=ocr_response.get("zone", None),
+        modified_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        model_metadata={
+            "model": ocr_response.get("model", ""),
+            "pages_processed": usage_info.get("pages_processed", None),
+            "doc_size_bytes": usage_info.get("doc_size_bytes", None),
+            "document_annotation": ocr_response.get("document_annotation", {}),
+        },
+    )
+
+    # Overwrite the raw OCR response with the formatted document
+    save_json(document.model_dump(), file_path)
+    return file_path
 
 
 def transform_function(

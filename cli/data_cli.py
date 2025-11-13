@@ -37,13 +37,12 @@ def create_tree_command(
     typer.echo(f"Tree structure saved to: {output_path}")
 
 
-def _build_tree_structure(directory: Path, current_depth: int = 0) -> dict:
+def _build_tree_structure(directory: Path) -> dict:
     """
     Recursively builds a tree structure of a directory.
 
     Args:
         directory: Path to the directory to scan
-        current_depth: Current depth in the traversal
 
     Returns:
         Dictionary representing the directory structure
@@ -56,7 +55,7 @@ def _build_tree_structure(directory: Path, current_depth: int = 0) -> dict:
 
     for item in items:
         if item.is_dir():
-            structure[item.name] = _build_tree_structure(item, current_depth + 1)
+            structure[item.name] = _build_tree_structure(item)
         else:
             structure[item.name] = {
                 "type": "file",
