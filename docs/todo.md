@@ -1,6 +1,12 @@
-# TODO
+# ✅ TODO
 
-## To Fix
+## 🪶 Features
+
+- [ ] Add caching system for the _"Dispositions Générales"_:
+  - [ ] Modify the prompt to explicit the use of caching;
+  - [ ] Since there is a cache storage cost, optimize the frequency of the API calls to minimize the total run-time;
+
+## 🏗️ To Fix
 
 **Bordeaux**:
 

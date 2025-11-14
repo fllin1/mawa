@@ -1,5 +1,5 @@
 root: /home/panda/_workspace/projects/mawa/data
-modified_at: '2025-11-13 20:08:33'
+modified_at: '2025-11-14 13:32:17'
 structure:
     1.external:
         bordeaux:
@@ -4704,59 +4704,59 @@ structure:
         grenoble:
             dispositions_generales.json:
                 type: file
-                size_bytes: 2592028
+                size_bytes: 2599956
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/grenoble/dispositions_generales.json
             zones_a_urbaniser.json:
                 type: file
-                size_bytes: 2237331
+                size_bytes: 2250960
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_a_urbaniser.json
             zones_agricoles_et_naturelles.json:
                 type: file
-                size_bytes: 1236333
+                size_bytes: 1241969
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_agricoles_et_naturelles.json
             zones_dediees.json:
                 type: file
-                size_bytes: 3047155
+                size_bytes: 3060984
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_dediees.json
             zones_urbaines_mixtes.json:
                 type: file
-                size_bytes: 8112339
+                size_bytes: 8151424
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_urbaines_mixtes.json
         lille:
             dispositions_generales.json:
                 type: file
-                size_bytes: 410580
+                size_bytes: 410352
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/lille/dispositions_generales.json
             zones_constructibles.json:
                 type: file
-                size_bytes: 1833933
+                size_bytes: 1868996
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/lille/zones_constructibles.json
             zones_inconstructibles.json:
                 type: file
-                size_bytes: 90860
+                size_bytes: 93524
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/lille/zones_inconstructibles.json
             zones_specifiques.json:
                 type: file
-                size_bytes: 2297149
+                size_bytes: 2333072
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/lille/zones_specifiques.json
         nantes:
             plu_general.json:
                 type: file
-                size_bytes: 4853853
+                size_bytes: 4874676
                 file_path: /home/panda/_workspace/projects/mawa/data/2.ocr/nantes/plu_general.json
     3.raw:
         grenoble:
             dispositions_generales.json:
                 type: file
-                size_bytes: 2641576
+                size_bytes: 2677112
                 file_path: /home/panda/_workspace/projects/mawa/data/3.raw/grenoble/dispositions_generales.json
             zones_a_urbaniser.json:
                 type: file
-                size_bytes: 2355843
+                size_bytes: 2074877
                 file_path: /home/panda/_workspace/projects/mawa/data/3.raw/grenoble/zones_a_urbaniser.json
             zones_agricoles_et_naturelles.json:
                 type: file
-                size_bytes: 1286650
+                size_bytes: 796516
                 file_path: /home/panda/_workspace/projects/mawa/data/3.raw/grenoble/zones_agricoles_et_naturelles.json
             zones_dediees.json:
                 type: file
@@ -4794,27 +4794,11 @@ structure:
                 size_bytes: 84989
                 file_path: /home/panda/_workspace/projects/mawa/data/3.raw/rnu_national/rnu_national.json
     4.interim:
-        grenoble:
-            dispositions_generales.json:
+        rnu_national:
+            rnu_national.json:
                 type: file
-                size_bytes: 4596
-                file_path: /home/panda/_workspace/projects/mawa/data/4.interim/grenoble/dispositions_generales.json
-            zones_a_urbaniser.json:
-                type: file
-                size_bytes: 9261
-                file_path: /home/panda/_workspace/projects/mawa/data/4.interim/grenoble/zones_a_urbaniser.json
-            zones_agricoles_et_naturelles.json:
-                type: file
-                size_bytes: 6183
-                file_path: /home/panda/_workspace/projects/mawa/data/4.interim/grenoble/zones_agricoles_et_naturelles.json
-            zones_dediees.json:
-                type: file
-                size_bytes: 7803
-                file_path: /home/panda/_workspace/projects/mawa/data/4.interim/grenoble/zones_dediees.json
-            zones_urbaines_mixtes.json:
-                type: file
-                size_bytes: 15998
-                file_path: /home/panda/_workspace/projects/mawa/data/4.interim/grenoble/zones_urbaines_mixtes.json
+                size_bytes: 84989
+                file_path: /home/panda/_workspace/projects/mawa/data/4.interim/rnu_national/rnu_national.json
     5.prompt: {}
     6.analysis: {}
     tests:
@@ -4839,3 +4823,8 @@ structure:
                 type: file
                 size_bytes: 6164
                 file_path: /home/panda/_workspace/projects/mawa/data/tests/cost_comparisions/test_gemini_comparison.py
+        format:
+            update_backup_ocr.py:
+                type: file
+                size_bytes: 1571
+                file_path: /home/panda/_workspace/projects/mawa/data/tests/format/update_backup_ocr.py

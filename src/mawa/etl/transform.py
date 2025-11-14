@@ -1,8 +1,12 @@
+import base64
 from datetime import datetime
-from pathlib import Path
+from io import BytesIO
 from typing import Optional, Tuple
 
-from mawa.config import CONFIG_DIR, INTERIM_DATA_DIR, OCR_DATA_DIR, City, RAW_DATA_DIR
+import imagehash
+from PIL import Image
+
+from mawa.config import CONFIG_DIR, INTERIM_DATA_DIR, OCR_DATA_DIR, RAW_DATA_DIR, City
 from mawa.models.gemini_model import GeminiModel
 from mawa.schemas.document_schema import Document, Page, Paragraph
 from mawa.utils import read_json, save_json
@@ -21,9 +25,7 @@ class Transform:
         self.doc_name = doc_name
         self.ocr_path = (OCR_DATA_DIR / city.value / doc_name).with_suffix(".json")
         self.raw_path = (RAW_DATA_DIR / city.value / doc_name).with_suffix(".json")
-        self.interim_path = (INTERIM_DATA_DIR / city.value / doc_name).with_suffix(
-            ".json"
-        )
+        self.interim_dir = INTERIM_DATA_DIR / city.value
 
     def ocr_response_to_document(self) -> None:
         """Format the OCR response into a Document schema."""
@@ -72,91 +74,60 @@ class Transform:
 
     def clean_document(self) -> None:
         """Clean the document by removing duplicates
-        TODO: Remove all non necessary images and text
+        TODO: Improve funciton to remove all non necessary images and text
         """
         document = read_json(self.raw_path)
         document = Document(**document)
 
         # Count occurences of all page.content and images
         images_dict = {}
-        pages_dict = {}
 
         for page in document.pages:
-            content = "\n".join([paragraph.content for paragraph in page.paragraphs])
-            if content in pages_dict:
-                pages_dict[content].append(page.index)
-            else:
-                pages_dict[content] = [page.index]
-
             for image in page.images:
                 b64 = image.image_base64
-                if b64 in images_dict:
-                    images_dict[b64].append((page.index, image))
-                else:
-                    images_dict[b64] = [(page.index, image)]
-
-        # Remove duplicated pages
-        pages_to_remove = set()
-        for content, page_indexes in pages_dict.items():
-            if len(page_indexes) > 1:
-                pages_to_remove.update(page_indexes)
-
-        # Remove pages in reverse order to avoid index shifting issues
-        pages_to_remove_sorted = sorted(pages_to_remove, reverse=True)
-        for page_index in pages_to_remove_sorted:
-            # Find page by its index property, not list position
-            page_to_remove = next(
-                (p for p in document.pages if p.index == page_index), None
-            )
-            if page_to_remove:
-                document.pages.remove(page_to_remove)
+                hash = _get_image_hash_from_base64(b64)
+                name_img = image.name_img
+                images_dict[name_img] = {
+                    "page_index": page.index,
+                    "image_hash": hash,
+                    "image": image,
+                }
 
         # Create a mapping of page index to page object for quick lookup
         page_map = {page.index: page for page in document.pages}
 
+        # Get duplicated images
+        duplicated_images = []
+        img_name_set = set[str]()
+        for name_img1, image_data1 in images_dict.items():
+            for name_img2, image_data2 in images_dict.items():
+                if name_img1 >= name_img2:
+                    continue
+
+                if image_data1["image_hash"] - image_data2["image_hash"] < 5:
+                    if image_data1["image"].name_img not in img_name_set:
+                        img_name_set.add(image_data1["image"].name_img)
+                        duplicated_images.append(image_data1)
+                    if image_data2["image"].name_img not in img_name_set:
+                        img_name_set.add(image_data2["image"].name_img)
+                        duplicated_images.append(image_data2)
+
         # Remove duplicated images
-        for b64, images in images_dict.items():
-            if len(images) <= 1:
-                continue
+        for image_data in duplicated_images:
+            # Remove image from page
+            page = page_map[image_data["page_index"]]
+            page.images.remove(image_data["image"])
 
-            for page_index, image in images:
-                # Skip if page was removed
-                if page_index in pages_to_remove:
-                    continue
+            # Remove image tag from paragraph
+            image_name = image_data["image"].name_img
+            image_tag = f"![{image_name}]({image_name})"
+            for paragraph in page.paragraphs:
+                if image_tag in paragraph.content:
+                    paragraph.content = paragraph.content.replace(image_tag, "")
+                    paragraph.content = paragraph.content.strip()
+                    break
 
-                # Get page from map (using actual index property)
-                page = page_map.get(page_index)
-                if page is None:
-                    continue
-
-                # Find image in page by base64 (safer than object comparison)
-                image_to_remove = next(
-                    (
-                        img
-                        for img in page.images
-                        if img.image_base64 == image.image_base64
-                    ),
-                    None,
-                )
-                if image_to_remove is None:
-                    continue
-
-                page.images.remove(image_to_remove)
-
-                paragraphs_to_remove = []
-                for paragraph in page.paragraphs:
-                    if image.name_img in paragraph.content:
-                        image_tag = f"![{image.name_img}]({image.image_base64})"
-                        paragraph.content = paragraph.content.replace(image_tag, "")
-                        paragraph.content = paragraph.content.strip()
-
-                        if not paragraph.content:
-                            paragraphs_to_remove.append(paragraph)
-
-                for paragraph in paragraphs_to_remove:
-                    page.paragraphs.remove(paragraph)
-
-        save_json(document.model_dump(), self.save_path)
+        save_json(document.model_dump(), self.raw_path)
 
     def pages_splitting(self, model: Optional[str] = "flash") -> None:
         """Transform the formatted OCR output in a standard format.
@@ -166,33 +137,27 @@ class Transform:
             model (Optional[str]): The model to use for the Gemini model
         """
         # Load document from save_path (3.raw)
-        if not self.save_path.exists():
-            raise FileNotFoundError(
-                f"File not found: {self.save_path}. Please run 'format' and 'clean' first."
-            )
-
-        document_data = read_json(self.save_path)
+        document_data = read_json(self.raw_path)
         document = Document(**document_data)
 
-        system_prompt, parts, response_schema = _generate_prompt_parts(document)
+        parts, response_schema = _generate_prompt_parts_split(document)
 
         gemini_model = GeminiModel(model=model)
         response = gemini_model.generate_content(
-            parts,
-            system_prompt=system_prompt,
+            prompt=parts,
             json_schema=response_schema,
         )
         json_response = response.model_dump()
 
-        self.interim_path.parent.mkdir(exist_ok=True, parents=True)
-        save_json(json_response, self.interim_path)
+        self.interim_dir.parent.mkdir(exist_ok=True, parents=True)
+        save_json(json_response, self.interim_dir.with_suffix(".page_split.json"))
 
     def split_documents(self):
         """Split the document into multiple documents based on the zoning and zone."""
         document = read_json(self.raw_path)
         document = Document(**document)
 
-        page_splitting = read_json(self.interim_path)
+        page_splitting = read_json(self.interim_dir.with_suffix(".page_split.json"))
 
         # Create a mapping of page index to page object for safe lookup
         page_map = {page.index: page for page in document.pages}
@@ -213,12 +178,28 @@ class Transform:
             doc_zone = document.model_copy(
                 update={"pages": selected_pages, "zoning": zoning, "zone": zone}
             )
-            save_path = self.interim_path.parent / zoning / f"{zone}.json"
+            save_path = self.interim_dir / f"{zone}.json"
             save_path.parent.mkdir(exist_ok=True, parents=True)
             save_json(doc_zone.model_dump(), save_path)
 
+            self._save_images(doc_zone)
 
-def _generate_prompt_parts(document: Document) -> Tuple[str, list[str], dict]:
+    def _save_images(self, doc_zone: Document):
+        """Save the images to the /data/interim/city/zone/ folder"""
+        for page in doc_zone.pages:
+            for image in page.images:
+                image_base64 = image.image_base64
+                image_dir = self.interim_dir / doc_zone.name_of_document
+                image_dir.mkdir(exist_ok=True, parents=True)
+                image_path = (image_dir / image.name_img).with_suffix(".jpg")
+                with open(image_path, "wb") as f:
+                    f.write(base64.b64decode(image_base64))
+
+
+# Helper functions
+
+
+def _generate_prompt_parts_split(document: Document) -> Tuple[list[str], dict]:
     """Returns system prompt, prompt's parts and json_schema.
 
     Reconstructs markdown from paragraphs by joining them with double newlines.
@@ -227,13 +208,13 @@ def _generate_prompt_parts(document: Document) -> Tuple[str, list[str], dict]:
         document: The Document object to extract pages from
 
     Returns:
-        Tuple containing system prompt, list of page markdown strings, and response schema
+        Tuple containing list of page markdown strings, and response schema
     """
     prompt_template = read_json(CONFIG_DIR / "prompt" / "prompt.json")
-    system_prompt = prompt_template["prompt_extract_zones"]
+    instruction = prompt_template["prompt_extract_zones"]
 
     # Reconstruct markdown from paragraphs (join with \n\n as in ocr_response_to_document)
-    parts = [
+    parts = [instruction] + [
         f"Page {page.index}: {'\n\n'.join(paragraph.content for paragraph in page.paragraphs)}"
         for page in document.pages
     ]
@@ -241,4 +222,10 @@ def _generate_prompt_parts(document: Document) -> Tuple[str, list[str], dict]:
     schema_path = CONFIG_DIR / "schemas" / "response_schema_pages.json"
     response_schema_pages = read_json(schema_path)
 
-    return system_prompt, parts, response_schema_pages
+    return parts, response_schema_pages
+
+
+def _get_image_hash_from_base64(base64_string: str) -> imagehash.ImageHash:
+    img_data = base64.b64decode(base64_string)
+    img = Image.open(BytesIO(img_data))
+    return imagehash.phash(img)
