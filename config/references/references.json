@@ -1,0 +1,23 @@
+{
+  "mwplu": {
+    "vocabulaire": "https://outil2amenagement.cerema.fr/ressources/guides-fiches/lexique-national-durbanisme",
+    "politiques_vente": "https://mwplu.com/politiques-de-ventes",
+    "politique_confidentialite": "https://mwplu.com/politique-de-confidentialite",
+    "cgu": "https://mwplu.com/terms"
+  },
+  "grenoble": {
+    "source_plu_url": "https://cloud.grenoblealpesmetropole.fr/index.php/s/Db4aYze8MYkdJdo"
+  },
+  "nantes": {
+    "source_plu_url": "https://metropole.nantes.fr/mes-services-mon-quotidien/le-plan-local-d-urbanisme-metropolitain-le-plum#sync_doc-98437"
+  },
+  "lille": {
+    "source_plu_url": "https://diffuweb.lillemetropole.fr/PLU3/PLU3_APPROUVE/PLU3.html"
+  },
+  "bordeaux": {
+    "source_plu_url": "https://fichiers.bordeaux-metropole.fr/plu/PLU31_interactif/Html/511_Reglement_pieces_ecrites_zones.html"
+  },
+  "rnu_national": {
+    "source_plu_url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074075/LEGISCTA000031719326/#LEGISCTA000031721322"
+  }
+}

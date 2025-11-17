@@ -12,8 +12,12 @@ RAW_DATA_DIR = DATA_DIR / "3.raw"
 INTERIM_DATA_DIR = DATA_DIR / "4.interim"
 PROMPT_DATA_DIR = DATA_DIR / "5.prompt"
 ANALYSIS_DATA_DIR = DATA_DIR / "6.analysis"
+RENDER_DATA_DIR = DATA_DIR / "7.render"
 
 CONFIG_DIR = ROOT_DIR / "config"
+
+DOCS_DIR = ROOT_DIR / "docs"
+IMAGES_DIR = DOCS_DIR / "images"
 
 
 # Constants

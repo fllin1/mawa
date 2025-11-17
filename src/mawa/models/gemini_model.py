@@ -57,7 +57,7 @@ class GeminiModel:
             system_prompt (Optional[Part | str]): The system prompt to use to generate the text
         """
         config = GenerateContentConfig(
-            system_instruction=_string_to_part(system_prompt),
+            system_instruction=system_prompt,
             response_mime_type="application/json",
             response_json_schema=json_schema,
         )
@@ -75,38 +75,72 @@ class GeminiModel:
         tokens = self.client.models.count_tokens(
             model=self.model, contents=prompt
         ).model_dump()
-        input_tokens = tokens["total_tokens"]
-        cached_tokens = tokens["cached_content_token_count"]
-        cached_tokens = cached_tokens if cached_tokens is not None else 0
 
-        cost = 0
+        tokens = self._calculate_cost(tokens)
+        return tokens
+
+    def output_tokens_metadata(self, tokens: dict) -> dict[str, Any]:
+        """
+        Calculate the output cost based on the output tokens metadata.
+        Prices updated (check on https://ai.google.dev/pricing)
+        """
+        tokens = self._calculate_cost(tokens)
+        return tokens
+
+    # Helper functions
+
+    def _calculate_cost(self, tokens: dict) -> float:
+        if self.model not in PRICING:
+            return tokens
+
+        prices = PRICING[self.model]
+
+        cached_tokens = tokens.get("cached_content_token_count", 0)
+        cached_tokens = cached_tokens if cached_tokens is not None else 0
+        time_taken = tokens.get("time_taken", 0)
+
+        if "prompt_token_count" in tokens:
+            input_tokens = tokens["prompt_token_count"]
+        else:
+            input_tokens = tokens.get("total_tokens", 0) - cached_tokens
+
+        output_tokens = tokens.get("candidates_token_count", 0)
+        output_tokens += tokens.get("thoughts_token_count", 0)
+
+        input_cost = 0
+        output_cost = 0
         hourly_cache_cost = 0
 
         if self.model == "gemini-2.5-pro":
-            prices = PRICING["gemini-2.5-pro"]
             if input_tokens <= 200_000:
-                cost += input_tokens * prices["input_up_to_200k"]
+                input_cost += input_tokens * prices["input_up_to_200k"]
             else:
-                cost += input_tokens * prices["input_200k_to_1M"]
+                input_cost += input_tokens * prices["input_200k_to_1M"]
 
             if cached_tokens <= 200_000:
-                cost += cached_tokens * prices["cache_up_to_200k"]
+                input_cost += cached_tokens * prices["cache_up_to_200k"]
             else:
-                cost += cached_tokens * prices["cache_200k_to_1M"]
+                input_cost += cached_tokens * prices["cache_200k_to_1M"]
+
+            if output_tokens <= 200_000:
+                output_cost += output_tokens * prices["output_up_to_200k"]
+            else:
+                output_cost += output_tokens * prices["output_200k_to_1M"]
 
             hourly_cache_cost = cached_tokens * prices["cache_storage"]
+            storage_cost = time_taken * hourly_cache_cost / 3600
 
         elif self.model == "gemini-2.5-flash":
-            prices = PRICING["gemini-2.5-flash"]
-            cost += input_tokens * prices["input"]
-            cost += cached_tokens * prices["cache"]
+            input_cost += input_tokens * prices["input"]
+            input_cost += cached_tokens * prices["cache"]
+            output_cost += output_tokens * prices["output"]
             hourly_cache_cost = cached_tokens * prices["cache_storage"]
+            storage_cost = time_taken * hourly_cache_cost / 3600
 
-        tokens["token_cost"] = cost / 1_000_000
+        tokens["input_token_cost"] = (input_cost) / 1_000_000
+        tokens["output_token_cost"] = (output_cost) / 1_000_000
+        tokens["total_token_cost"] = (input_cost + output_cost) / 1_000_000
         tokens["hourly_cache_storage_cost"] = hourly_cache_cost / 1_000_000
+        tokens["storage_cost"] = storage_cost / 1_000_000
+
         return tokens
-
-
-def _string_to_part(elem: str | Part | None) -> Part:
-    """Convert a string to a Part if it is a string"""
-    return Part(text=elem) if isinstance(elem, str) else elem

@@ -15,6 +15,12 @@ from mawa.utils import read_json, save_json
 class Transform:
     """Class to handle the transformation of the OCR response into a Document schema.
 
+    The pre-processed data is saved in the /data/3.raw/ folder.
+
+    The page-split data is saved in the /data/4.interim/ folder with the suffix .page_split.json.
+
+    The split documents are saved in the /data/4.interim/ folder with the suffix .json.
+
     Args:
         city (City): The city of the document.
         doc_name (str): The name of the document.

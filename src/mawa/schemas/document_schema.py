@@ -1,6 +1,8 @@
-from pydantic import BaseModel
 from typing import Literal, Optional
-from mawa.schemas.ocr_schema import Image, Dimensions
+
+from pydantic import BaseModel
+
+from mawa.schemas.ocr_schema import Dimensions, Image
 
 
 class Paragraph(BaseModel):

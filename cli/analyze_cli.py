@@ -7,6 +7,18 @@ app = typer.Typer(help="CLI for analysis")
 
 
 @app.command("create_prompts")
+def create_prompts_command(city: City, zone: str) -> None:
+    """Create the prompts for the document by zone
+
+    Args:
+        city (City): The city of the document
+        zone (str): The zone of the document
+    """
+    analyze = Analyze(city, zone)
+    analyze.create_prompt_plu()
+
+
+@app.command("analyze")
 def analyze_command(city: City, zone: str) -> None:
     """Analyze the document by zone
 
@@ -15,7 +27,7 @@ def analyze_command(city: City, zone: str) -> None:
         zone (str): The zone of the document
     """
     analyze = Analyze(city, zone)
-    analyze.create_prompts()
+    analyze.generate_analysis_plu()
 
 
 if __name__ == "__main__":
