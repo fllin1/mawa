@@ -19,7 +19,7 @@ def render_command(
         zone (str): The zone of the document
     """
     input_path = ANALYSIS_DATA_DIR / city.value / f"{zone}.analysis.json"
-    output_directory = RENDER_DATA_DIR / city.value / "pdf"
+    output_directory = RENDER_DATA_DIR / city.value
     output_directory.mkdir(parents=True, exist_ok=True)
     output_path = (output_directory / f"{zone}.pdf").as_posix()
 
@@ -27,9 +27,9 @@ def render_command(
 
     if not custom_title:
         custom_title = [
-            {"text": f"{city.value.capitalize()}", "style": "city"},
+            {"text": f"{city.value.title()} Métropole", "style": "city"},
             {"text": "Plan Local d'Urbanisme intercommunal", "style": "zoning"},
-            {"text": f"Zone {zone.capitalize()}", "style": "zone"},
+            {"text": f"Zone {zone}", "style": "zone"},
         ]
 
     generate_pdf_report(

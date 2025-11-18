@@ -29,9 +29,11 @@ def local_upsert_data_command(city: City) -> None:
 def supabase_upsert_data_command(
     documents: bool = typer.Option(True, help="Upsert the documents dataset"),
     sources: bool = typer.Option(True, help="Upsert the sources dataset"),
-    city: Optional[City] = None,
-    zone: Optional[str] = None,
-    document_name: Optional[str] = None,
+    city: City = typer.Option(None, "--city", "-c", help="The city to filter"),
+    zone: str = typer.Option(None, "--zone", "-z", help="The zone to filter"),
+    document_name: str = typer.Option(
+        None, "--document-name", "-n", help="The document name to filter"
+    ),
 ) -> None:
     """Upsert the dataset for the city"""
     supabase = Supabase()
@@ -39,6 +41,20 @@ def supabase_upsert_data_command(
         supabase.upsert_documents_dataset(city, zone)
     if sources:
         supabase.upsert_sources_dataset(city, document_name)
+
+
+@supabase.command("upload_images")
+def supabase_upload_images_command(city: City, document_name: str) -> None:
+    """Upload the images to the Supabase storage"""
+    supabase = Supabase()
+    supabase.upload_images(city, document_name)
+
+
+@supabase.command("upload_pdf")
+def supabase_upload_pdf_command(city: City, zone: str) -> None:
+    """Upload the PDF document to the Supabase storage"""
+    supabase = Supabase()
+    supabase.upload_pdf_document(city, zone)
 
 
 @app.command("tree")

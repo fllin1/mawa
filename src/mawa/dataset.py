@@ -11,7 +11,9 @@ from mawa.config import (
     CONFIG_DIR,
     DATA_DIR,
     EXTERNAL_DATA_DIR,
+    INTERIM_DATA_DIR,
     RAW_DATA_DIR,
+    RENDER_DATA_DIR,
     City,
 )
 from mawa.schemas import Analysis, Document
@@ -198,6 +200,20 @@ class Supabase:
         )
         self.df_doc, self.df_source = load_datasets()
 
+    def upsert_sources_dataset(
+        self, city: Optional[City] = None, document_name: Optional[str] = None
+    ) -> None:
+        """Upsert the sources dataset to the Supabase database"""
+        df_source = self.df_source.copy()
+        if city is not None:
+            df_source = df_source[df_source["city"] == city.value]
+        if document_name is not None:
+            df_source = df_source[df_source["document_name"] == document_name]
+
+        self.client.table(TABLE_SOURCES).upsert(
+            df_source.to_dict(orient="records")
+        ).execute()
+
     def upsert_documents_dataset(
         self, city: Optional[City] = None, zone: Optional[str] = None
     ) -> None:
@@ -212,19 +228,45 @@ class Supabase:
             df_doc.to_dict(orient="records")
         ).execute()
 
-    def upsert_sources_dataset(
-        self, city: Optional[City] = None, document_name: Optional[str] = None
-    ) -> None:
-        """Upsert the sources dataset to the Supabase database"""
+    def upload_images(self, city: City, document_name: str) -> None:
+        """Upload the images to the Supabase storage"""
         df_source = self.df_source.copy()
-        if city is not None:
-            df_source = df_source[df_source["city"] == city.value]
-        if document_name is not None:
-            df_source = df_source[df_source["document_name"] == document_name]
+        df_source = df_source[df_source["city"] == city.value]
+        df_source = df_source[df_source["document_name"] == document_name]
 
-        self.client.table(TABLE_SOURCES).upsert(
-            df_source.to_dict(orient="records")
-        ).execute()
+        assert len(df_source) == 1, f"Expected 1 row, got {len(df_source)}"
+
+        images_path = df_source["source_images_path"].iloc[0]
+        if not images_path:  # if images_path == {} or images_path is None
+            print(f"No images found for {document_name}")
+            return
+
+        assert isinstance(images_path, dict)
+
+        local_image_dir = INTERIM_DATA_DIR / city.value / document_name
+        for img_name, img_path in images_path.items():
+            local_img_path = local_image_dir / img_name
+            self.client.storage.from_("sources").upload(
+                path=img_path,
+                file=open(local_img_path, "rb"),
+                file_options={"content-type": "image/jpeg", "upsert": True},
+            )
+
+    def upload_pdf_document(self, city: City, zone: str) -> None:
+        """Upload the PDF document to the Supabase storage"""
+        df_doc = self.df_doc.copy()
+        df_doc = df_doc[df_doc["city"] == city.value]
+        df_doc = df_doc[df_doc["zone"] == zone]
+
+        assert len(df_doc) == 1, f"Expected 1 row, got {len(df_doc)}"
+
+        local_pdf_path = RENDER_DATA_DIR / city.value / f"{zone}.pdf"
+
+        self.client.storage.from_("documents").upload(
+            path=f"{city.value}/{zone}.pdf",
+            file=open(local_pdf_path, "rb"),
+            file_options={"content-type": "application/pdf", "upsert": "true"},
+        )
 
 
 def load_datasets() -> tuple[pd.DataFrame, pd.DataFrame]:

@@ -24,7 +24,7 @@ IMAGES_DIR = DOCS_DIR / "images"
 class City(enum.Enum):
     RNU_NATIONAL = "rnu_national"
     BORDEAUX = "bordeaux"
-    GRENOBLE = "grenoble"
+    GRENOBLE = "grenoble-alpes"
     LILLE = "lille"
     MONTPELLIER = "montpellier"
     NANTES = "nantes"
