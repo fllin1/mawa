@@ -8,14 +8,12 @@ class Rule(BaseModel):
     source_ref: str = Field(description="La référence de la source de la règle")
 
 
-class Chapter(BaseModel):
-    sections: dict[str, list[Rule]] = Field(
-        description="Mapping of section IDs (e.g., 'section_1_1') to their regulation items"
-    )
-
-
 class Analysis(BaseModel):
-    chapters: dict[str, Chapter] = Field(description="Les chapitres de l'analyse")
+    chapters: dict[str, dict[str, list[Rule]]] = Field(
+        description="Les chapitres de l'analyse, "
+        "chaque chapitre est un objet avec des sections, "
+        "chaque section est un objet avec des règles"
+    )
     name_of_document: str = Field(description="Le nom du document")
     date_of_document: str = Field(description="La date du document")
     document_type: Literal["PLU", "DG", "PLU_AND_DG"] = Field(

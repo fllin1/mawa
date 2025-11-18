@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Literal, Optional
 
 from mawa.config import OCR_DATA_DIR, City
-from mawa.models.mistral_ocr import MistralOCR
+from mawa.models import MistralOCR
 from mawa.utils import read_data_tree, save_json
 
 
@@ -34,7 +34,7 @@ class Extraction:
         if date:
             self.data_tree_external = self.data_tree_external[date]
 
-    def _find_raw_document_path(self, data_tree: dict) -> Path:
+    def _find_raw_document_path(self) -> Path:
         """
         TODO: Test this method
         Finds recursively the path of the document in the raw data tree.
@@ -43,10 +43,10 @@ class Extraction:
             Path: Path to the document
         """
         doc_name = self.doc_name.with_suffix(".pdf")
-        for key, values in data_tree.items():
+        for key, values in self.data_tree_external.items():
             if doc_name in values:
                 return Path(values[doc_name]["file_path"])
-            return self._find_raw_document_path(self, data_tree[key])
+            return self._find_raw_document_path()
 
     def extraction_function(self) -> Path:
         """Extract and format content from a file using Mistral OCR.
@@ -57,7 +57,7 @@ class Extraction:
         Returns:
             Path: Path to the saved data
         """
-        raw_file_path = self._find_raw_document_path(self.data_tree_external)
+        raw_file_path = self._find_raw_document_path()
 
         mistral_ocr = MistralOCR()
         file_id = mistral_ocr.upload_file(raw_file_path)

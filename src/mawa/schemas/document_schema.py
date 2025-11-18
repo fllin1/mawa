@@ -8,6 +8,8 @@ from mawa.schemas.ocr_schema import Dimensions, Image
 class Paragraph(BaseModel):
     index: int
     content: str
+    tag: Optional[str] = None
+    source_ref: Optional[str] = None
 
 
 class Page(BaseModel):

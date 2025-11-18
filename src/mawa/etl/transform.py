@@ -6,8 +6,14 @@ from typing import Optional, Tuple
 import imagehash
 from PIL import Image
 
-from mawa.config import CONFIG_DIR, INTERIM_DATA_DIR, OCR_DATA_DIR, RAW_DATA_DIR, City
-from mawa.models.gemini_model import GeminiModel
+from mawa.config import (
+    CONFIG_DIR,
+    INTERIM_DATA_DIR,
+    OCR_DATA_DIR,
+    RAW_DATA_DIR,
+    City,
+)
+from mawa.models import GeminiModel
 from mawa.schemas.document_schema import Document, Page, Paragraph
 from mawa.utils import read_json, save_json
 
@@ -29,8 +35,12 @@ class Transform:
     def __init__(self, city: City, doc_name: str):
         self.city = city
         self.doc_name = doc_name
-        self.ocr_path = (OCR_DATA_DIR / city.value / doc_name).with_suffix(".json")
-        self.raw_path = (RAW_DATA_DIR / city.value / doc_name).with_suffix(".json")
+        self.ocr_path = (OCR_DATA_DIR / city.value / doc_name).with_suffix(
+            ".json"
+        )
+        self.raw_path = (RAW_DATA_DIR / city.value / doc_name).with_suffix(
+            ".json"
+        )
         self.interim_dir = INTERIM_DATA_DIR / city.value
 
     def ocr_response_to_document(self) -> None:
@@ -42,8 +52,12 @@ class Transform:
         for index, page in enumerate(ocr_response["pages"]):
             paragraphs: list[Paragraph] = []
 
-            for sub_index, paragraph in enumerate(page["markdown"].split("\n\n")):
-                paragraphs.append(Paragraph(index=sub_index + 1, content=paragraph))
+            for sub_index, paragraph in enumerate(
+                page["markdown"].split("\n\n")
+            ):
+                paragraphs.append(
+                    Paragraph(index=sub_index + 1, content=paragraph)
+                )
 
             pages.append(
                 Page(
@@ -156,14 +170,18 @@ class Transform:
         json_response = response.model_dump()
 
         self.interim_dir.parent.mkdir(exist_ok=True, parents=True)
-        save_json(json_response, self.interim_dir.with_suffix(".page_split.json"))
+        save_json(
+            json_response, self.interim_dir.with_suffix(".page_split.json")
+        )
 
     def split_documents(self):
         """Split the document into multiple documents based on the zoning and zone."""
         document = read_json(self.raw_path)
         document = Document(**document)
 
-        page_splitting = read_json(self.interim_dir.with_suffix(".page_split.json"))
+        page_splitting = read_json(
+            self.interim_dir.with_suffix(".page_split.json")
+        )
 
         # Create a mapping of page index to page object for safe lookup
         page_map = {page.index: page for page in document.pages}
@@ -175,7 +193,9 @@ class Transform:
 
             # Get pages by their index property (not list position)
             selected_pages = [
-                page_map[page_idx] for page_idx in page_indices if page_idx in page_map
+                page_map[page_idx]
+                for page_idx in page_indices
+                if page_idx in page_map
             ]
 
             if not selected_pages:

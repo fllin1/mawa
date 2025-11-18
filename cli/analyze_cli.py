@@ -1,7 +1,7 @@
 import typer
 
 from mawa.config import City
-from mawa.analyze.create_prompts import Analyze
+from mawa.analyze import Analyze
 
 app = typer.Typer(help="CLI for analysis")
 
@@ -16,6 +16,18 @@ def create_prompts_command(city: City, zone: str) -> None:
     """
     analyze = Analyze(city, zone)
     analyze.create_prompt_plu()
+
+
+@app.command("format")
+def format_command(city: City, zone: str) -> None:
+    """Format the analysis for the document by zone
+
+    Args:
+        city (City): The city of the document
+        zone (str): The zone of the document
+    """
+    analyze = Analyze(city, zone)
+    analyze.format_analysis()
 
 
 @app.command("analyze")

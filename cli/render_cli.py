@@ -1,14 +1,17 @@
+from typing import Optional
+
 import typer
 
-from mawa.config import City, ANALYSIS_DATA_DIR, RENDER_DATA_DIR
-from mawa.render.pdf_generator import generate_pdf_report
-from mawa.render.utils import get_references
+from mawa.config import ANALYSIS_DATA_DIR, RENDER_DATA_DIR, City
+from mawa.render import generate_pdf_report, get_references
 
 app = typer.Typer(help="CLI for rendering")
 
 
 @app.command("render")
-def render_command(city: City, zone: str) -> None:
+def render_command(
+    city: City, zone: str, custom_title: Optional[list[dict[str, str]]] = None
+) -> None:
     """Render the document by zone
 
     Args:
@@ -22,15 +25,18 @@ def render_command(city: City, zone: str) -> None:
 
     references = get_references(city.value)
 
+    if not custom_title:
+        custom_title = [
+            {"text": f"{city.value.capitalize()}", "style": "city"},
+            {"text": "Plan Local d'Urbanisme intercommunal", "style": "zoning"},
+            {"text": f"Zone {zone.capitalize()}", "style": "zone"},
+        ]
+
     generate_pdf_report(
         input_path,
         output_path,
         references=references,
-        custom_title=[
-            {"text": "Réglement National d'Urbanisme", "style": "city"},
-            # {"text": "Plan Local d'Urbanisme", "style": "zoning"},
-            {"text": "Code de l'urbanisme", "style": "zone"},
-        ],
+        custom_title=custom_title,
     )
 
 

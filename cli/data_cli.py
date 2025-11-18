@@ -1,12 +1,44 @@
-from pathlib import Path
 import datetime
+from pathlib import Path
+from typing import Optional
 
 import typer
 import yaml
 
-from mawa.config import CONFIG_DIR, DATA_DIR
+from mawa.config import CONFIG_DIR, DATA_DIR, City
+from mawa.dataset import Dataset, Supabase
 
 app = typer.Typer(help="CLI for data management")
+
+local = typer.Typer(help="CLI for local data management")
+supabase = typer.Typer(help="CLI for supabase data management")
+
+app.add_typer(local, name="local")
+app.add_typer(supabase, name="supabase")
+
+
+@local.command("upsert")
+def local_upsert_data_command(city: City) -> None:
+    """Upsert the dataset for the city"""
+    dataset = Dataset(city)
+    dataset.upsert_dataset()
+    typer.echo(f"Dataset upserted for {city.value}")
+
+
+@supabase.command("upsert")
+def supabase_upsert_data_command(
+    documents: bool = typer.Option(True, help="Upsert the documents dataset"),
+    sources: bool = typer.Option(True, help="Upsert the sources dataset"),
+    city: Optional[City] = None,
+    zone: Optional[str] = None,
+    document_name: Optional[str] = None,
+) -> None:
+    """Upsert the dataset for the city"""
+    supabase = Supabase()
+    if documents:
+        supabase.upsert_documents_dataset(city, zone)
+    if sources:
+        supabase.upsert_sources_dataset(city, document_name)
 
 
 @app.command("tree")

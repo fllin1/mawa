@@ -1,10 +1,10 @@
 from pathlib import Path
-import typer
 from typing import Literal, Optional
 
-from mawa.etl.extraction import Extraction
+import typer
+
 from mawa.config import City
-from mawa.etl.transform import Transform
+from mawa.etl import Extraction, Transform
 
 app = typer.Typer(
     help="CLI for text extraction from PDFs", pretty_exceptions_enable=False
