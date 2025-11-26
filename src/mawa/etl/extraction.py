@@ -21,8 +21,8 @@ class Extraction:
 
     def __init__(
         self,
-        doc_name: str,
         city: City,
+        doc_name: str,
         doc_type: Literal["PLU", "DG", "PLU_AND_DG"],
         date: Optional[str] = None,
     ):

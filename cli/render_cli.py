@@ -27,7 +27,7 @@ def render_command(
 
     if not custom_title:
         custom_title = [
-            {"text": f"{city.value.title()} Métropole", "style": "city"},
+            {"text": f"{city.value.title()}", "style": "city"},
             {"text": "Plan Local d'Urbanisme intercommunal", "style": "zoning"},
             {"text": f"Zone {zone}", "style": "zone"},
         ]

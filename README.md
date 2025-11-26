@@ -11,62 +11,143 @@ Mawa is an urban document analysis pipeline. It currently only supports French P
 
 This project requires [uv](https://docs.astral.sh/uv/guides/install-python/) and **Python>=3.12**.
 
-Then simply run this few lines of code, and you're ready to go.
-
 ```sh
 git clone https://github.com/fllin1/mawa
 cd mawa
-
 uv sync
+uv pip install -e .
 ```
 
-## Run the engine
+## 🚶‍♀️‍➡️ Walkthrough
 
-Due to the inconsistent formats of the PLU of each city in France, this pipeline is not yet a plug any document and play the analysis machine. In fact, we'll keep implementing tools to take into account each edgecases that come with each city.
+Due to the inconsistent formats of the PLUi of each intercommunality/city in France, this pipeline is not (yet) a plug any document and play the analysis machine. In fact, we'll continuously implement tools which will take into account each edgecases that come with each city.
 
-However, there is still a general process :
+The detailled process for each city will be written in the `./cli/city/` folder.
 
-### Extract, Transform, Load
+We'll still walk through the general process.
 
-Client `uv run cli/etl_cli.py`.
+**NOTE**: This project do not address how the data is retrieved. To find that out, check the [archi-data](https://github.com/fllin1/archi-data) project.
 
-1. `extract` has two features, _(if no flag is provided, it will run both these steps at once)_:
+### 🛸 Extract, Transform, Load
 
-   1. `ocr` extract the text from a _.pdf_ document in the [1.raw](./data/1.raw/) folder, and save it in the [2.ocr](./data/2.ocr/) folder.
-   2. `pre-process` pre-process the ocr results, creating sub-divisions of the _pages_ into _paragraphs_.
+---
 
-2. `transform` will perform a first analysis of the documents, and return _list_ of page numbers, indicating which pages of the original documents corresponds to which _urban zone_. This _list_ will be saved in the [3.interim](./data/3.interim/) folder.
+For each **city** and each updated **date** of your documents:
 
-3. `load` upload this data to the Supabase Database, with the respective images that will be stored in a Bucket. (**NOT_IMPLEMENTED_YET**)
+1. Create a directory `./data/1.external/{city}/{date}/`
+2. Place a document of name **doc_name** at `./data/1.external/{city}/{date}/{doc_name}.pdf`
+3. Then this command:
 
-### Analyse
+   ```sh
+   uv run cli/data_cli.py tree
+   ```
 
-Client `uv run cli/analyze_cli.py`.
+   It will save your data tree at `./config/data_tree.yaml`.
 
-### Serve
+#### Step 1️⃣: OCR
 
-## Architecture
+The OCR is currently realized with [Mistral OCR](https://docs.mistral.ai/capabilities/document_ai/basic_ocr).
 
-### Data
+```sh
+uv run cli/etl_cli.py extract $city $doc_name $doc_type --date $date
+```
 
-All folders and files name should be lowercase, and except for the 5 main subdirectories, they shall only contain characters.
+Where `$doc_name` will often either be "reglement", "{zoning}" or "{zone}".
+And `$doc_type` is either "DG" (_Dispositions Générales_), "PLU" or "PLU_AND_DG".
+Also `$date` is the updated date of the source document.
 
-#### 1.raw
+#### Step 2️⃣: Prepare the data
 
-Contains the raw PLU _.pdf_ files for each city. Use consistent and "official" names.
+At this point, the text and images should have been successfuly extracted from the document and saved in the `./data/2.ocr/{city}/{doc_name}.json` file.
 
-Suppose the folder "./data/1.raw/" is the level 0 folder.
+The first command which standardize, formats and saves in `./data/3.raw/{city}/{zoning}.json` the _ocr_response_ is mandatory, the second is optional:
 
-**Rules**:
+```sh
+uv run cli/etl_cli.py transform $city $doc_name format
+uv run cli/etl_cli.py transform $city $doc_name clean  # Work in progress
 
-1. the 1st level folders should hold the names of the city;
-2. the 2nd level should hold the dates of modification of the files;
-3. the 3rd level should be the files themselves;
+```
 
-#### 2.ocr
+The `clean` method removes all duplicated images, based on hasing. The goal would be to improve this step, and robustly remove all unnecessary text and images. **Note**: we should keep a copy of the raw formatted file.
 
-#### 3.interim
+Then, depending on the nature of `{doc_name}`, we proceed to one of the two steps:
 
-#### 4.prompt
+1. If we are working with **reglement** or **zoning** documents, we need to split them into **zones** documents:
 
-#### 5.analysis
+   ```sh
+   uv run cli/etl_cli.py transform $city $zoning find_split
+   uv run cli/etl_cli.py transform $city $zoning apply_split
+   ```
+
+   The splitted documents will be saved in the `./data/4.interim/{city}/` folder, by zone, along with a model response `./data/4.interim/{city}/{zoning}.page_split.json` detailling the page splits.
+
+2. **TODO** (implement the method for zones documents):
+   - Copy and paste the formatted files into the _4.interim/{city}_ folder;
+   - Use the `mawa.etl.transform.Transform({city}, {doc_name})._save_images({doc_zone})` method to extract and save the images from _base64_ to _.jpg_.
+
+#### Step 3️⃣: Supabase
+
+This Data Loading actually happens "a posteriori".
+
+The final analysis generated will contain tags, it is only after asserting that the tags in the analysis are rightly linked to the formatted document from the _4.interim/{city}_ folder, that we load the data.
+
+### 🩻 Analyse
+
+---
+
+Update your data-tree.
+
+```sh
+uv run cli/data_cli.py tree
+```
+
+Using the latest Gemini Pro model (currently _gemini-3-pro-preview_), we run the analysis. To see how the API call is done, check the [Analysis class](./src/mawa/analyze/analyze.py), the [prompt](./config/prompt/prompt_synthesis.txt) and the [JSON Schema](./config/schemas/response_schema_synthese.json).
+
+Anyway, run:
+
+```sh
+uv run cli/analyze_cli.py analyze $city $zone
+uv run cli/analyze_cli.py format $city $zone
+```
+
+You should be able to check your prompt structure at `./data/5.prompt/{city}/{zone}.prompt.json` and the result of your analysis at `./data/6.analysis/{city}/{zone}.json`.
+
+If all went well, you should be able to generate a _.pdf_ report from the analysis, using:
+
+```sh
+uv run cli/render_cli.py render $city $zone
+```
+
+The result should be saved at `./data/7.render/{city}/{zone}.pdf`.
+
+### 🌐 Serve
+
+---
+
+This step consists on creating/updating the database table `documents` and `sources`.
+
+First create the **local** CSV tables:
+
+```sh
+uv run cli/data_cli.py local upsert
+```
+
+Then push the data to Supabase:
+
+```sh
+uv run cli/data_cli.py supabase upsert
+uv run cli/data_cli.py supabase upload_images
+uv run cli/data_cli.py supabase upload_pdf
+```
+
+The data pushed to Supabase is based on the local tables. So you have to create and update them first.
+
+## 📐 Architecture
+
+### 🗃️ Data Folder Structure
+
+TODO
+
+### 🛺 Codebase Cheat Sheet
+
+TODO

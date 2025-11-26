@@ -18,18 +18,6 @@ def create_prompts_command(city: City, zone: str) -> None:
     analyze.create_prompt_plu()
 
 
-@app.command("format")
-def format_command(city: City, zone: str) -> None:
-    """Format the analysis for the document by zone
-
-    Args:
-        city (City): The city of the document
-        zone (str): The zone of the document
-    """
-    analyze = Analyze(city, zone)
-    analyze.format_analysis()
-
-
 @app.command("analyze")
 def analyze_command(city: City, zone: str) -> None:
     """Analyze the document by zone
@@ -40,6 +28,18 @@ def analyze_command(city: City, zone: str) -> None:
     """
     analyze = Analyze(city, zone)
     analyze.generate_analysis_plu()
+
+
+@app.command("format")
+def format_command(city: City, zone: str) -> None:
+    """Format the analysis for the document by zone
+
+    Args:
+        city (City): The city of the document
+        zone (str): The zone of the document
+    """
+    analyze = Analyze(city, zone)
+    analyze.format_analysis()
 
 
 if __name__ == "__main__":

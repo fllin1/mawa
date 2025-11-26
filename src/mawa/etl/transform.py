@@ -33,14 +33,14 @@ class Transform:
     """
 
     def __init__(self, city: City, doc_name: str):
-        self.city = city
+        self.city = city.value
         self.doc_name = doc_name
-        self.ocr_path = (OCR_DATA_DIR / city.value / doc_name).with_suffix(
-            ".json"
-        )
-        self.raw_path = (RAW_DATA_DIR / city.value / doc_name).with_suffix(
-            ".json"
-        )
+
+        file_path = f"{city.value}/{doc_name}.json"
+        self.ocr_path = OCR_DATA_DIR / file_path
+        self.raw_path = RAW_DATA_DIR / file_path
+        self.page_split_path = self.raw_path.with_suffix(".page_split.json")
+
         self.interim_dir = INTERIM_DATA_DIR / city.value
 
     def ocr_response_to_document(self) -> None:
@@ -52,12 +52,8 @@ class Transform:
         for index, page in enumerate(ocr_response["pages"]):
             paragraphs: list[Paragraph] = []
 
-            for sub_index, paragraph in enumerate(
-                page["markdown"].split("\n\n")
-            ):
-                paragraphs.append(
-                    Paragraph(index=sub_index + 1, content=paragraph)
-                )
+            for sub_index, paragraph in enumerate(page["markdown"].split("\n\n")):
+                paragraphs.append(Paragraph(index=sub_index + 1, content=paragraph))
 
             pages.append(
                 Page(
@@ -169,19 +165,15 @@ class Transform:
         )
         json_response = response.model_dump()
 
-        self.interim_dir.parent.mkdir(exist_ok=True, parents=True)
-        save_json(
-            json_response, self.interim_dir.with_suffix(".page_split.json")
-        )
+        self.page_split_path.mkdir(exist_ok=True, parents=True)
+        save_json(json_response, self.page_split_path)
 
     def split_documents(self):
         """Split the document into multiple documents based on the zoning and zone."""
         document = read_json(self.raw_path)
         document = Document(**document)
 
-        page_splitting = read_json(
-            self.interim_dir.with_suffix(".page_split.json")
-        )
+        page_splitting = read_json(self.page_split_path)
 
         # Create a mapping of page index to page object for safe lookup
         page_map = {page.index: page for page in document.pages}
@@ -193,9 +185,7 @@ class Transform:
 
             # Get pages by their index property (not list position)
             selected_pages = [
-                page_map[page_idx]
-                for page_idx in page_indices
-                if page_idx in page_map
+                page_map[page_idx] for page_idx in page_indices if page_idx in page_map
             ]
 
             if not selected_pages:
@@ -227,12 +217,9 @@ class Transform:
 
 def _generate_prompt_parts_split(document: Document) -> Tuple[list[str], dict]:
     """Returns system prompt, prompt's parts and json_schema.
-
     Reconstructs markdown from paragraphs by joining them with double newlines.
-
     Args:
         document: The Document object to extract pages from
-
     Returns:
         Tuple containing list of page markdown strings, and response schema
     """
