@@ -6,10 +6,16 @@ from typing import Optional
 
 from google.genai.types import Blob, Part
 
-from mawa.config import ANALYSIS_DATA_DIR, CONFIG_DIR, PROMPT_DATA_DIR, City
+from mawa.config import (
+    ANALYSIS_DATA_DIR,
+    CONFIG_DIR,
+    INTERIM_DATA_DIR,
+    PROMPT_DATA_DIR,
+    City,
+)
 from mawa.models import GeminiModel
 from mawa.schemas import Analysis, Document
-from mawa.utils import read_data_tree, read_json, save_json
+from mawa.utils import read_json, save_json
 
 
 class Analyze:
@@ -32,18 +38,19 @@ class Analyze:
         self.zone = zone
         self.dg = dg
 
-        self.data_tree = read_data_tree("4.interim")[self.city]
-        self.doc_path = self.data_tree[self.zone + ".json"]["file_path"]
+        self.doc_path = INTERIM_DATA_DIR / self.city / f"{self.zone}.json"
         self.doc = Document(**read_json(self.doc_path))
 
-        self.save_path = ANALYSIS_DATA_DIR / self.city / f"{self.zone}.analysis.json"
+        self.save_path = (
+            ANALYSIS_DATA_DIR / self.city / f"{self.zone}.analysis.json"
+        )
 
         self.model = GeminiModel(model=model)
 
     def create_prompt_plu(self) -> Path:
         """Create the prompts for the analysis"""
         if self.dg:
-            dg_path = self.data_tree[self.dg + ".json"]["file_path"]
+            dg_path = INTERIM_DATA_DIR / self.city / f"{self.dg}.json"
             doc_dg = Document(**read_json(dg_path))
         prompts = read_json(CONFIG_DIR / "prompt" / "prompt.json")
         instruction = prompts["prompt_plu"]
@@ -53,6 +60,7 @@ class Analyze:
         if self.dg:
             parts.extend(self._document_to_parts(doc_dg))
 
+        self._save_prompt_to_json(parts)
         return parts
 
     def generate_analysis_plu(self) -> Path:
@@ -92,7 +100,9 @@ class Analyze:
             zoning=self.doc.zoning,
             zone=self.doc.zone,
             modified_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            model_metadata={k: v for k, v in json_response.items() if k != "parsed"},
+            model_metadata={
+                k: v for k, v in json_response.items() if k != "parsed"
+            },
         )
         self.save_path.parent.mkdir(exist_ok=True, parents=True)
         save_json(analysis.model_dump(), self.save_path)
@@ -100,7 +110,9 @@ class Analyze:
 
     # Helper functions
 
-    def _document_to_parts(self, document: Optional[Document] = None) -> list[Part]:
+    def _document_to_parts(
+        self, document: Optional[Document] = None
+    ) -> list[Part]:
         """
         Converts a Document object into a list of Parts for the Gemini API.
 
@@ -125,7 +137,9 @@ class Analyze:
 
             # Step 3: Create the main text Part for the page, including delimiters.
             header = f"\n--- DÉBUT PAGE {page.index} ({document.document_type}) ---\n"
-            footer = f"\n--- FIN PAGE {page.index} ({document.document_type}) ---\n"
+            footer = (
+                f"\n--- FIN PAGE {page.index} ({document.document_type}) ---\n"
+            )
             full_text_for_page = header + page_content + footer
             parts.append(Part(text=full_text_for_page))
             # Adding all the page content in a single Part offers better context for the model.
@@ -135,7 +149,9 @@ class Analyze:
                 for image_data in page.images:
                     name_img = image_data.name_img
 
-                    parts.append(Part(text=f"\n--- DÉBUT IMAGE: {name_img} ---\n"))
+                    parts.append(
+                        Part(text=f"\n--- DÉBUT IMAGE: {name_img} ---\n")
+                    )
 
                     # Add the image data Part.
                     image_part = Part(
@@ -146,9 +162,10 @@ class Analyze:
                     )
                     parts.append(image_part)
 
-                    parts.append(Part(text=f"\n--- FIN IMAGE: {name_img} ---\n"))
+                    parts.append(
+                        Part(text=f"\n--- FIN IMAGE: {name_img} ---\n")
+                    )
 
-        self._save_prompt_to_json(parts)
         return parts
 
     def _save_prompt_to_json(self, parts: list[Part]) -> Path:
@@ -160,16 +177,18 @@ class Analyze:
         for part in parts:
             if part.text:
                 # Text part
-                serializable_parts.append({"type": "text", "content": part.text})
+                serializable_parts.append(
+                    {"type": "text", "content": part.text}
+                )
             elif part.inline_data:
                 # Image part - re-encode binary data to base64 string
                 serializable_parts.append(
                     {
                         "type": "image",
                         "mime_type": part.inline_data.mime_type,
-                        "data_base64": base64.b64encode(part.inline_data.data).decode(
-                            "utf-8"
-                        ),
+                        "data_base64": base64.b64encode(
+                            part.inline_data.data
+                        ).decode("utf-8"),
                     }
                 )
 

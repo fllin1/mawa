@@ -43,7 +43,7 @@ class Transform:
 
         self.interim_dir = INTERIM_DATA_DIR / city.value
 
-    def ocr_response_to_document(self) -> None:
+    def ocr_response_to_document(self, zone: Optional[str] = None) -> None:
         """Format the OCR response into a Document schema."""
         ocr_response = read_json(self.ocr_path)
 
@@ -78,8 +78,7 @@ class Transform:
             date_of_document=ocr_response["date_of_document"],
             document_type=ocr_response["document_type"],
             city=self.city,
-            zonage=ocr_response.get("zonage", None),
-            zone=ocr_response.get("zone", None),
+            zone=zone,
             modified_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             model_metadata=model_metadata,
         )
@@ -198,14 +197,19 @@ class Transform:
             save_path.parent.mkdir(exist_ok=True, parents=True)
             save_json(doc_zone.model_dump(), save_path)
 
-            self._save_images(doc_zone)
+            self.save_images(zone)
 
-    def _save_images(self, doc_zone: Document):
+    def save_images(self, zone: str) -> None:
         """Save the images to the /data/interim/city/zone/ folder"""
+        doc_zone = read_json(self.interim_dir / f"{zone}.json")
+        doc_zone = Document(**doc_zone)
+
+        assert doc_zone.zone == zone, f"Expected {zone}, got {doc_zone.zone}"
+
         for page in doc_zone.pages:
             for image in page.images:
                 image_base64 = image.image_base64
-                image_dir = self.interim_dir / doc_zone.name_of_document
+                image_dir = self.interim_dir / zone
                 image_dir.mkdir(exist_ok=True, parents=True)
                 image_path = (image_dir / image.name_img).with_suffix(".jpg")
                 with open(image_path, "wb") as f:

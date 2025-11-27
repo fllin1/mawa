@@ -16,6 +16,7 @@ dependencies = [
     "reportlab>=4.4.4",
     "svglib>=1.6.0",
     "pandas>=2.3.3",
+    "tqdm>=4.67.1",
 ]
 
 [build-system]

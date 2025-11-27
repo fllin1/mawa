@@ -1,9 +1,9 @@
 {
   "mwplu": {
     "vocabulaire": "https://outil2amenagement.cerema.fr/ressources/guides-fiches/lexique-national-durbanisme",
-    "politiques_vente": "https://mwplu.com/politiques-de-ventes",
-    "politique_confidentialite": "https://mwplu.com/politique-de-confidentialite",
-    "cgu": "https://mwplu.com/terms"
+    "politiques_vente": "https://mwplu.com/policies/sales",
+    "politique_confidentialite": "https://mwplu.com/policies/privacy",
+    "cgu": "https://mwplu.com/policies/terms"
   },
   "grenoble": {
     "source_plu_url": "https://cloud.grenoblealpesmetropole.fr/index.php/s/Db4aYze8MYkdJdo"

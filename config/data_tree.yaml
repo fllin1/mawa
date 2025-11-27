@@ -1,5 +1,5 @@
 root: /home/greypanda/_workspace/projects/mawa/data
-modified_at: '2025-11-17 20:06:01'
+modified_at: '2025-11-25 16:23:57'
 structure:
     1.external:
         bordeaux:
@@ -4564,36 +4564,36 @@ structure:
                 type: file
                 size_bytes: 0
                 file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/bordeaux/.gitkeep
-        grenoble:
+        grenoble-alpes:
             '2024-07-05':
                 dispositions_generales.pdf:
                     type: file
                     size_bytes: 3960760
-                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/2024-07-05/dispositions_generales.pdf
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/2024-07-05/dispositions_generales.pdf
                 zones_a_urbaniser.pdf:
                     type: file
                     size_bytes: 3889696
-                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/2024-07-05/zones_a_urbaniser.pdf
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/2024-07-05/zones_a_urbaniser.pdf
                 zones_agricoles_et_naturelles.pdf:
                     type: file
                     size_bytes: 2283717
-                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/2024-07-05/zones_agricoles_et_naturelles.pdf
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/2024-07-05/zones_agricoles_et_naturelles.pdf
                 zones_dediees.pdf:
                     type: file
                     size_bytes: 4011038
-                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/2024-07-05/zones_dediees.pdf
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/2024-07-05/zones_dediees.pdf
                 zones_urbaines_mixtes.pdf:
                     type: file
                     size_bytes: 56202951
-                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/2024-07-05/zones_urbaines_mixtes.pdf
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/2024-07-05/zones_urbaines_mixtes.pdf
             .DS_Store:
                 type: file
                 size_bytes: 6148
-                file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/.DS_Store
+                file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/.DS_Store
             .gitkeep:
                 type: file
                 size_bytes: 0
-                file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble/.gitkeep
+                file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/grenoble-alpes/.gitkeep
         lille:
             '2024-06-28':
                 annexes_documentaires_t1.pdf:
@@ -4701,27 +4701,942 @@ structure:
                     size_bytes: 11027617
                     file_path: /home/greypanda/_workspace/projects/mawa/data/1.external/toulouse/2024-12-12/plu_genral.pdf
     2.ocr:
-        grenoble:
+        bordeaux:
+            Zones Agricoles:
+                Ab.json:
+                    type: file
+                    size_bytes: 194973
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Agricoles/Ab.json
+                Ag.json:
+                    type: file
+                    size_bytes: 198124
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Agricoles/Ag.json
+                Ah1.json:
+                    type: file
+                    size_bytes: 268708
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Agricoles/Ah1.json
+                Ah2.json:
+                    type: file
+                    size_bytes: 193927
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Agricoles/Ah2.json
+            Zones Naturelles:
+                Nb.json:
+                    type: file
+                    size_bytes: 194028
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Nb.json
+                Ne.json:
+                    type: file
+                    size_bytes: 268398
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Ne.json
+                Nf.json:
+                    type: file
+                    size_bytes: 193927
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Nf.json
+                Ng.json:
+                    type: file
+                    size_bytes: 195013
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Ng.json
+                Nh1.json:
+                    type: file
+                    size_bytes: 197832
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Nh1.json
+                Nh2.json:
+                    type: file
+                    size_bytes: 222478
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Nh2.json
+                Nm.json:
+                    type: file
+                    size_bytes: 191073
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Nm.json
+                Nu.json:
+                    type: file
+                    size_bytes: 191579
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Naturelles/Nu.json
+            Zones Urbaines:
+                UM1.json:
+                    type: file
+                    size_bytes: 287611
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM1.json
+                UM10.json:
+                    type: file
+                    size_bytes: 285374
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM10.json
+                UM11.json:
+                    type: file
+                    size_bytes: 264734
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM11.json
+                UM12.json:
+                    type: file
+                    size_bytes: 250016
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM12.json
+                UM13.json:
+                    type: file
+                    size_bytes: 278964
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM13.json
+                UM14.json:
+                    type: file
+                    size_bytes: 282865
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM14.json
+                UM15.json:
+                    type: file
+                    size_bytes: 294131
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM15.json
+                UM16.json:
+                    type: file
+                    size_bytes: 296914
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM16.json
+                UM17.json:
+                    type: file
+                    size_bytes: 300121
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM17.json
+                UM18.json:
+                    type: file
+                    size_bytes: 374291
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM18.json
+                UM19.json:
+                    type: file
+                    size_bytes: 284486
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM19.json
+                UM2.json:
+                    type: file
+                    size_bytes: 276307
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM2.json
+                UM20.json:
+                    type: file
+                    size_bytes: 290781
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM20.json
+                UM21.json:
+                    type: file
+                    size_bytes: 286161
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM21.json
+                UM22.json:
+                    type: file
+                    size_bytes: 273281
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM22.json
+                UM23.json:
+                    type: file
+                    size_bytes: 300457
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM23.json
+                UM24.json:
+                    type: file
+                    size_bytes: 278371
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM24.json
+                UM25.json:
+                    type: file
+                    size_bytes: 347170
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM25.json
+                UM26.json:
+                    type: file
+                    size_bytes: 250014
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM26.json
+                UM27.json:
+                    type: file
+                    size_bytes: 246768
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM27.json
+                UM28.json:
+                    type: file
+                    size_bytes: 290853
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM28.json
+                UM29.json:
+                    type: file
+                    size_bytes: 349455
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM29.json
+                UM3.json:
+                    type: file
+                    size_bytes: 288053
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM3.json
+                UM30.json:
+                    type: file
+                    size_bytes: 292955
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM30.json
+                UM31.json:
+                    type: file
+                    size_bytes: 257060
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM31.json
+                UM32.json:
+                    type: file
+                    size_bytes: 281325
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM32.json
+                UM33.json:
+                    type: file
+                    size_bytes: 268901
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM33.json
+                UM34.json:
+                    type: file
+                    size_bytes: 320133
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM34.json
+                UM35.json:
+                    type: file
+                    size_bytes: 330544
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM35.json
+                UM36.json:
+                    type: file
+                    size_bytes: 250594
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM36.json
+                UM37.json:
+                    type: file
+                    size_bytes: 304106
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM37.json
+                UM38.json:
+                    type: file
+                    size_bytes: 303034
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM38.json
+                UM39.json:
+                    type: file
+                    size_bytes: 289704
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM39.json
+                UM4.json:
+                    type: file
+                    size_bytes: 276538
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM4.json
+                UM40.json:
+                    type: file
+                    size_bytes: 250600
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM40.json
+                UM41.json:
+                    type: file
+                    size_bytes: 282448
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM41.json
+                UM42.json:
+                    type: file
+                    size_bytes: 253239
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM42.json
+                UM43.json:
+                    type: file
+                    size_bytes: 413468
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM43.json
+                UM5.json:
+                    type: file
+                    size_bytes: 260385
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM5.json
+                UM6.json:
+                    type: file
+                    size_bytes: 261284
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM6.json
+                UM7.json:
+                    type: file
+                    size_bytes: 292596
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM7.json
+                UM8.json:
+                    type: file
+                    size_bytes: 258028
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM8.json
+                UM9.json:
+                    type: file
+                    size_bytes: 264185
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UM9.json
+                UP1.json:
+                    type: file
+                    size_bytes: 2120132
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP1.json
+                UP10.json:
+                    type: file
+                    size_bytes: 199522
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP10.json
+                UP11.json:
+                    type: file
+                    size_bytes: 218563
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP11.json
+                UP12.json:
+                    type: file
+                    size_bytes: 1274880
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP12.json
+                UP13.json:
+                    type: file
+                    size_bytes: 458665
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP13.json
+                UP14.json:
+                    type: file
+                    size_bytes: 714925
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP14.json
+                UP15.json:
+                    type: file
+                    size_bytes: 1225698
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP15.json
+                UP16.json:
+                    type: file
+                    size_bytes: 214440
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP16.json
+                UP17.json:
+                    type: file
+                    size_bytes: 196764
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP17.json
+                UP18.json:
+                    type: file
+                    size_bytes: 510702
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP18.json
+                UP19.json:
+                    type: file
+                    size_bytes: 612646
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP19.json
+                UP2.json:
+                    type: file
+                    size_bytes: 2229078
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP2.json
+                UP20.json:
+                    type: file
+                    size_bytes: 1177753
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP20.json
+                UP21.json:
+                    type: file
+                    size_bytes: 687695
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP21.json
+                UP22.json:
+                    type: file
+                    size_bytes: 970187
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP22.json
+                UP23.json:
+                    type: file
+                    size_bytes: 202812
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP23.json
+                UP24.json:
+                    type: file
+                    size_bytes: 691243
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP24.json
+                UP25.json:
+                    type: file
+                    size_bytes: 809320
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP25.json
+                UP26.json:
+                    type: file
+                    size_bytes: 1496403
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP26.json
+                UP27.json:
+                    type: file
+                    size_bytes: 1458195
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP27.json
+                UP28.json:
+                    type: file
+                    size_bytes: 287420
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP28.json
+                UP29.json:
+                    type: file
+                    size_bytes: 211343
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP29.json
+                UP3.json:
+                    type: file
+                    size_bytes: 286879
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP3.json
+                UP30.json:
+                    type: file
+                    size_bytes: 766590
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP30.json
+                UP31.json:
+                    type: file
+                    size_bytes: 184723
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP31.json
+                UP32.json:
+                    type: file
+                    size_bytes: 210358
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP32.json
+                UP33.json:
+                    type: file
+                    size_bytes: 218131
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP33.json
+                UP34.json:
+                    type: file
+                    size_bytes: 279802
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP34.json
+                UP35.json:
+                    type: file
+                    size_bytes: 279528
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP35.json
+                UP36.json:
+                    type: file
+                    size_bytes: 285946
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP36.json
+                UP37.json:
+                    type: file
+                    size_bytes: 286691
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP37.json
+                UP38.json:
+                    type: file
+                    size_bytes: 271624
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP38.json
+                UP39.json:
+                    type: file
+                    size_bytes: 969338
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP39.json
+                UP4.json:
+                    type: file
+                    size_bytes: 217478
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP4.json
+                UP40.json:
+                    type: file
+                    size_bytes: 304839
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP40.json
+                UP41.json:
+                    type: file
+                    size_bytes: 934284
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP41.json
+                UP42.json:
+                    type: file
+                    size_bytes: 1069565
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP42.json
+                UP43.json:
+                    type: file
+                    size_bytes: 1056488
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP43.json
+                UP44.json:
+                    type: file
+                    size_bytes: 805670
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP44.json
+                UP45.json:
+                    type: file
+                    size_bytes: 222584
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP45.json
+                UP46.json:
+                    type: file
+                    size_bytes: 201986
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP46.json
+                UP47.json:
+                    type: file
+                    size_bytes: 201752
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP47.json
+                UP48.json:
+                    type: file
+                    size_bytes: 232474
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP48.json
+                UP49.json:
+                    type: file
+                    size_bytes: 722349
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP49.json
+                UP5.json:
+                    type: file
+                    size_bytes: 286512
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP5.json
+                UP50.json:
+                    type: file
+                    size_bytes: 286804
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP50.json
+                UP51.json:
+                    type: file
+                    size_bytes: 894595
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP51.json
+                UP52.json:
+                    type: file
+                    size_bytes: 883009
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP52.json
+                UP53.json:
+                    type: file
+                    size_bytes: 203605
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP53.json
+                UP54.json:
+                    type: file
+                    size_bytes: 861530
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP54.json
+                UP55.json:
+                    type: file
+                    size_bytes: 617922
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP55.json
+                UP56.json:
+                    type: file
+                    size_bytes: 754566
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP56.json
+                UP57.json:
+                    type: file
+                    size_bytes: 208331
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP57.json
+                UP59.json:
+                    type: file
+                    size_bytes: 861716
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP59.json
+                UP6.json:
+                    type: file
+                    size_bytes: 211965
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP6.json
+                UP60.json:
+                    type: file
+                    size_bytes: 195236
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP60.json
+                UP61.json:
+                    type: file
+                    size_bytes: 1217380
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP61.json
+                UP62.json:
+                    type: file
+                    size_bytes: 280568
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP62.json
+                UP63.json:
+                    type: file
+                    size_bytes: 210208
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP63.json
+                UP64.json:
+                    type: file
+                    size_bytes: 1027715
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP64.json
+                UP66.json:
+                    type: file
+                    size_bytes: 848733
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP66.json
+                UP67.json:
+                    type: file
+                    size_bytes: 218738
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP67.json
+                UP68.json:
+                    type: file
+                    size_bytes: 881244
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP68.json
+                UP69.json:
+                    type: file
+                    size_bytes: 578016
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP69.json
+                UP7.json:
+                    type: file
+                    size_bytes: 273064
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP7.json
+                UP70.json:
+                    type: file
+                    size_bytes: 288199
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP70.json
+                UP71.json:
+                    type: file
+                    size_bytes: 218551
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP71.json
+                UP73.json:
+                    type: file
+                    size_bytes: 335041
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP73.json
+                UP74.json:
+                    type: file
+                    size_bytes: 946723
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP74.json
+                UP75.json:
+                    type: file
+                    size_bytes: 1201932
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP75.json
+                UP76.json:
+                    type: file
+                    size_bytes: 207769
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP76.json
+                UP77.json:
+                    type: file
+                    size_bytes: 191359
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP77.json
+                UP79.json:
+                    type: file
+                    size_bytes: 203283
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP79.json
+                UP8.json:
+                    type: file
+                    size_bytes: 212844
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP8.json
+                UP81.json:
+                    type: file
+                    size_bytes: 177654
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP81.json
+                UP82.json:
+                    type: file
+                    size_bytes: 320831
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP82.json
+                UP83.json:
+                    type: file
+                    size_bytes: 242435
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP83.json
+                UP84.json:
+                    type: file
+                    size_bytes: 911390
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP84.json
+                UP85.json:
+                    type: file
+                    size_bytes: 308045
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP85.json
+                UP86.json:
+                    type: file
+                    size_bytes: 540088
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP86.json
+                UP87.json:
+                    type: file
+                    size_bytes: 1279058
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP87.json
+                UP88.json:
+                    type: file
+                    size_bytes: 927996
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP88.json
+                UP89.json:
+                    type: file
+                    size_bytes: 312934
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP89.json
+                UP9.json:
+                    type: file
+                    size_bytes: 211120
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UP9.json
+                UPZ1.json:
+                    type: file
+                    size_bytes: 753976
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ1.json
+                UPZ2.json:
+                    type: file
+                    size_bytes: 298423
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ2.json
+                UPZ3.json:
+                    type: file
+                    size_bytes: 694442
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ3.json
+                UPZ4.json:
+                    type: file
+                    size_bytes: 301037
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ4.json
+                UPZ5.json:
+                    type: file
+                    size_bytes: 294215
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ5.json
+                UPZ6.json:
+                    type: file
+                    size_bytes: 228827
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ6.json
+                UPZ7-1.json:
+                    type: file
+                    size_bytes: 906843
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ7-1.json
+                UPZ7-2.json:
+                    type: file
+                    size_bytes: 783262
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ7-2.json
+                UPZ7.json:
+                    type: file
+                    size_bytes: 901279
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ7.json
+                UPZ8.json:
+                    type: file
+                    size_bytes: 296007
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ8.json
+                UPZ9.json:
+                    type: file
+                    size_bytes: 298567
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/UPZ9.json
+                US1.json:
+                    type: file
+                    size_bytes: 227443
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US1.json
+                US10.json:
+                    type: file
+                    size_bytes: 286217
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US10.json
+                US11.json:
+                    type: file
+                    size_bytes: 193768
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US11.json
+                US12.json:
+                    type: file
+                    size_bytes: 233888
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US12.json
+                US13.json:
+                    type: file
+                    size_bytes: 209242
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US13.json
+                US2.json:
+                    type: file
+                    size_bytes: 307862
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US2.json
+                US3.json:
+                    type: file
+                    size_bytes: 248020
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US3.json
+                US4.json:
+                    type: file
+                    size_bytes: 227605
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US4.json
+                US5.json:
+                    type: file
+                    size_bytes: 227897
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US5.json
+                US6.json:
+                    type: file
+                    size_bytes: 225355
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US6.json
+                US7.json:
+                    type: file
+                    size_bytes: 223722
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US7.json
+                US8.json:
+                    type: file
+                    size_bytes: 226419
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US8.json
+                US9.json:
+                    type: file
+                    size_bytes: 223592
+                    file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones
+                        Urbaines/US9.json
+            "Zones \xC0 Urbaniser":
+                AU1.json:
+                    type: file
+                    size_bytes: 264273
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU1.json"
+                AU10.json:
+                    type: file
+                    size_bytes: 229689
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU10.json"
+                AU11.json:
+                    type: file
+                    size_bytes: 208407
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU11.json"
+                AU12.json:
+                    type: file
+                    size_bytes: 296303
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU12.json"
+                AU13.json:
+                    type: file
+                    size_bytes: 263027
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU13.json"
+                AU15.json:
+                    type: file
+                    size_bytes: 319796
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU15.json"
+                AU16.json:
+                    type: file
+                    size_bytes: 288626
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU16.json"
+                AU17.json:
+                    type: file
+                    size_bytes: 248353
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU17.json"
+                AU19.json:
+                    type: file
+                    size_bytes: 273219
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU19.json"
+                AU2.json:
+                    type: file
+                    size_bytes: 225250
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU2.json"
+                AU20.json:
+                    type: file
+                    size_bytes: 283964
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU20.json"
+                AU3.json:
+                    type: file
+                    size_bytes: 262111
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU3.json"
+                AU4.json:
+                    type: file
+                    size_bytes: 363426
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU4.json"
+                AU5.json:
+                    type: file
+                    size_bytes: 319621
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU5.json"
+                AU6.json:
+                    type: file
+                    size_bytes: 278174
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU6.json"
+                AU7.json:
+                    type: file
+                    size_bytes: 227398
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU7.json"
+                AU8.json:
+                    type: file
+                    size_bytes: 232399
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU8.json"
+                AU9.json:
+                    type: file
+                    size_bytes: 223458
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU9.json"
+                AU99.json:
+                    type: file
+                    size_bytes: 43295
+                    file_path: "/home/greypanda/_workspace/projects/mawa/data/2.ocr/bordeaux/Zones\
+                        \ \xC0 Urbaniser/AU99.json"
+        grenoble-alpes:
             dispositions_generales.json:
                 type: file
-                size_bytes: 2599956
-                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble/dispositions_generales.json
+                size_bytes: 2591931
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble-alpes/dispositions_generales.json
             zones_a_urbaniser.json:
                 type: file
-                size_bytes: 2250960
-                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_a_urbaniser.json
+                size_bytes: 2237055
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble-alpes/zones_a_urbaniser.json
             zones_agricoles_et_naturelles.json:
                 type: file
-                size_bytes: 1241969
-                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_agricoles_et_naturelles.json
+                size_bytes: 1236258
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble-alpes/zones_agricoles_et_naturelles.json
             zones_dediees.json:
                 type: file
-                size_bytes: 3060984
-                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_dediees.json
+                size_bytes: 3046903
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble-alpes/zones_dediees.json
             zones_urbaines_mixtes.json:
                 type: file
-                size_bytes: 8151424
-                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble/zones_urbaines_mixtes.json
+                size_bytes: 8111511
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/grenoble-alpes/zones_urbaines_mixtes.json
         lille:
             dispositions_generales.json:
                 type: file
@@ -4744,28 +5659,37 @@ structure:
                 type: file
                 size_bytes: 4874676
                 file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/nantes/plu_general.json
+        rnu_national:
+            rnu_national.json:
+                type: file
+                size_bytes: 84989
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/rnu_national/rnu_national.json
+            rnu_national.tags.json:
+                type: file
+                size_bytes: 99080
+                file_path: /home/greypanda/_workspace/projects/mawa/data/2.ocr/rnu_national/rnu_national.tags.json
     3.raw:
-        grenoble:
+        grenoble-alpes:
             dispositions_generales.json:
                 type: file
-                size_bytes: 2677112
-                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble/dispositions_generales.json
+                size_bytes: 2641083
+                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble-alpes/dispositions_generales.json
             zones_a_urbaniser.json:
                 type: file
-                size_bytes: 2074877
-                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble/zones_a_urbaniser.json
+                size_bytes: 2002050
+                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble-alpes/zones_a_urbaniser.json
             zones_agricoles_et_naturelles.json:
                 type: file
-                size_bytes: 796516
-                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble/zones_agricoles_et_naturelles.json
+                size_bytes: 763193
+                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble-alpes/zones_agricoles_et_naturelles.json
             zones_dediees.json:
                 type: file
-                size_bytes: 3163874
-                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble/zones_dediees.json
+                size_bytes: 3163880
+                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble-alpes/zones_dediees.json
             zones_urbaines_mixtes.json:
                 type: file
-                size_bytes: 8426486
-                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble/zones_urbaines_mixtes.json
+                size_bytes: 8426492
+                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/grenoble-alpes/zones_urbaines_mixtes.json
         lille:
             dispositions_generales.json:
                 type: file
@@ -4793,6 +5717,10 @@ structure:
                 type: file
                 size_bytes: 84989
                 file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/rnu_national/rnu_national.json
+            rnu_national.tags.json:
+                type: file
+                size_bytes: 99080
+                file_path: /home/greypanda/_workspace/projects/mawa/data/3.raw/rnu_national/rnu_national.tags.json
     4.interim:
         rnu_national:
             rnu_national.json:
@@ -4809,15 +5737,14 @@ structure:
         rnu_national:
             rnu_national.analysis.json:
                 type: file
-                size_bytes: 23813
+                size_bytes: 24383
                 file_path: /home/greypanda/_workspace/projects/mawa/data/6.analysis/rnu_national/rnu_national.analysis.json
     7.render:
         rnu_national:
-            pdf:
-                rnu_national.pdf:
-                    type: file
-                    size_bytes: 88622
-                    file_path: /home/greypanda/_workspace/projects/mawa/data/7.render/rnu_national/pdf/rnu_national.pdf
+            rnu_national.pdf:
+                type: file
+                size_bytes: 88622
+                file_path: /home/greypanda/_workspace/projects/mawa/data/7.render/rnu_national/rnu_national.pdf
     tests:
         cost_comparisions:
             AU1.json:
@@ -4828,6 +5755,10 @@ structure:
                 type: file
                 size_bytes: 3716612
                 file_path: /home/greypanda/_workspace/projects/mawa/data/tests/cost_comparisions/AU1.pdf
+            AU1_page16.pdf:
+                type: file
+                size_bytes: 403964
+                file_path: /home/greypanda/_workspace/projects/mawa/data/tests/cost_comparisions/AU1_page16.pdf
             response_method1_direct_pdf.json:
                 type: file
                 size_bytes: 192288
@@ -4849,3 +5780,11 @@ structure:
             type: file
             size_bytes: 8502
             file_path: /home/greypanda/_workspace/projects/mawa/data/tests/rnu_national.analysis.json
+    dataset_documents.csv:
+        type: file
+        size_bytes: 20287
+        file_path: /home/greypanda/_workspace/projects/mawa/data/dataset_documents.csv
+    dataset_sources.csv:
+        type: file
+        size_bytes: 88524
+        file_path: /home/greypanda/_workspace/projects/mawa/data/dataset_sources.csv
