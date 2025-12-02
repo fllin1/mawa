@@ -17,6 +17,7 @@ dependencies = [
     "svglib>=1.6.0",
     "pandas>=2.3.3",
     "tqdm>=4.67.1",
+    "pymupdf>=1.26.6",
 ]
 
 [build-system]

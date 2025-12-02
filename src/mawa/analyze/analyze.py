@@ -41,9 +41,7 @@ class Analyze:
         self.doc_path = INTERIM_DATA_DIR / self.city / f"{self.zone}.json"
         self.doc = Document(**read_json(self.doc_path))
 
-        self.save_path = (
-            ANALYSIS_DATA_DIR / self.city / f"{self.zone}.analysis.json"
-        )
+        self.save_path = ANALYSIS_DATA_DIR / self.city / f"{self.zone}.analysis.json"
 
         self.model = GeminiModel(model=model)
 
@@ -65,6 +63,10 @@ class Analyze:
 
     def generate_analysis_plu(self) -> Path:
         """Generate the analysis of the PLU"""
+        if self.save_path.exists():
+            print(f"Analysis already exists for {self.zone}, skipping...")
+            return self.save_path
+
         parts = self.create_prompt_plu()
         json_schema = read_json(
             CONFIG_DIR / "schemas" / "response_schema_synthese.json"
@@ -75,6 +77,11 @@ class Analyze:
         end_time = time.time()
 
         json_response = response.model_dump()
+        # Remove thought_signature fields from response parts to avoid warnings
+        for candidate in json_response.get("candidates", []):
+            for part in candidate.get("content", {}).get("parts", []):
+                if isinstance(part, dict) and "thought_signature" in part:
+                    part.pop("thought_signature", None)
         json_response["usage_metadata"]["time_taken"] = end_time - start_time
 
         json_response["usage_metadata"] = self.model.output_tokens_metadata(
@@ -100,9 +107,7 @@ class Analyze:
             zoning=self.doc.zoning,
             zone=self.doc.zone,
             modified_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            model_metadata={
-                k: v for k, v in json_response.items() if k != "parsed"
-            },
+            model_metadata={k: v for k, v in json_response.items() if k != "parsed"},
         )
         self.save_path.parent.mkdir(exist_ok=True, parents=True)
         save_json(analysis.model_dump(), self.save_path)
@@ -110,9 +115,7 @@ class Analyze:
 
     # Helper functions
 
-    def _document_to_parts(
-        self, document: Optional[Document] = None
-    ) -> list[Part]:
+    def _document_to_parts(self, document: Optional[Document] = None) -> list[Part]:
         """
         Converts a Document object into a list of Parts for the Gemini API.
 
@@ -127,9 +130,10 @@ class Analyze:
         parts = []
 
         for page in document.pages:
-            # Step 1: Correctly clean paragraphs using a list comprehension.
+            # Step 1: Correctly clean paragraphs using a list comprehension, adding paragraph tags.
             cleaned_paragraphs = [
-                p.content.replace("\n", " ").strip() for p in page.paragraphs
+                f"[P{page.index}.{p.index}] {p.content.replace('\n', ' ').strip()}"
+                for p in page.paragraphs
             ]
 
             # Step 2: Join all cleaned paragraphs to form the complete text content for the page.
@@ -137,9 +141,7 @@ class Analyze:
 
             # Step 3: Create the main text Part for the page, including delimiters.
             header = f"\n--- DÉBUT PAGE {page.index} ({document.document_type}) ---\n"
-            footer = (
-                f"\n--- FIN PAGE {page.index} ({document.document_type}) ---\n"
-            )
+            footer = f"\n--- FIN PAGE {page.index} ({document.document_type}) ---\n"
             full_text_for_page = header + page_content + footer
             parts.append(Part(text=full_text_for_page))
             # Adding all the page content in a single Part offers better context for the model.
@@ -149,9 +151,7 @@ class Analyze:
                 for image_data in page.images:
                     name_img = image_data.name_img
 
-                    parts.append(
-                        Part(text=f"\n--- DÉBUT IMAGE: {name_img} ---\n")
-                    )
+                    parts.append(Part(text=f"\n--- DÉBUT IMAGE: {name_img} ---\n"))
 
                     # Add the image data Part.
                     image_part = Part(
@@ -162,9 +162,7 @@ class Analyze:
                     )
                     parts.append(image_part)
 
-                    parts.append(
-                        Part(text=f"\n--- FIN IMAGE: {name_img} ---\n")
-                    )
+                    parts.append(Part(text=f"\n--- FIN IMAGE: {name_img} ---\n"))
 
         return parts
 
@@ -177,18 +175,16 @@ class Analyze:
         for part in parts:
             if part.text:
                 # Text part
-                serializable_parts.append(
-                    {"type": "text", "content": part.text}
-                )
+                serializable_parts.append({"type": "text", "content": part.text})
             elif part.inline_data:
                 # Image part - re-encode binary data to base64 string
                 serializable_parts.append(
                     {
                         "type": "image",
                         "mime_type": part.inline_data.mime_type,
-                        "data_base64": base64.b64encode(
-                            part.inline_data.data
-                        ).decode("utf-8"),
+                        "data_base64": base64.b64encode(part.inline_data.data).decode(
+                            "utf-8"
+                        ),
                     }
                 )
 

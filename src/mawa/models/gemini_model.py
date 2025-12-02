@@ -10,11 +10,21 @@ from google.genai.types import (
 )
 
 from mawa.config import GEMINI_FLASH_MODEL, GEMINI_PRO_MODEL
+from mawa.utils import make_json_serializable
 
 load_dotenv()
 
 
 PRICING = {
+    "gemini-3-pro-preview": {
+        "input_up_to_200k": 2.0,  # $ par 1M tokens
+        "input_200k_to_1M": 4.0,
+        "output_up_to_200k": 12.00,
+        "output_200k_to_1M": 18.00,
+        "cache_up_to_200k": 0.20,
+        "cache_200k_to_1M": 0.40,
+        "cache_storage": 4.50,  # $ per 1M tokens
+    },
     "gemini-2.5-pro": {
         "input_up_to_200k": 1.25,  # $ par 1M tokens
         "input_200k_to_1M": 2.50,
@@ -61,7 +71,6 @@ class GeminiModel:
             response_mime_type="application/json",
             response_json_schema=json_schema,
         )
-        print(f"Request sent to {self.model}...")
         response = self.client.models.generate_content(
             model=self.model, contents=prompt, config=config
         )
@@ -77,7 +86,7 @@ class GeminiModel:
         ).model_dump()
 
         tokens = self._calculate_cost(tokens)
-        return tokens
+        return make_json_serializable(tokens)
 
     def output_tokens_metadata(self, tokens: dict) -> dict[str, Any]:
         """
@@ -85,7 +94,7 @@ class GeminiModel:
         Prices updated (check on https://ai.google.dev/pricing)
         """
         tokens = self._calculate_cost(tokens)
-        return tokens
+        return make_json_serializable(tokens)
 
     # Helper functions
 

@@ -1,6 +1,7 @@
 import base64
 from datetime import datetime
 from io import BytesIO
+from pathlib import Path
 from typing import Optional, Tuple
 
 import imagehash
@@ -36,7 +37,7 @@ class Transform:
         self.city = city.value
         self.doc_name = doc_name
 
-        file_path = f"{city.value}/{doc_name}.json"
+        file_path = Path(f"{city.value}/{doc_name}").with_suffix(".json")
         self.ocr_path = OCR_DATA_DIR / file_path
         self.raw_path = RAW_DATA_DIR / file_path
         self.page_split_path = self.raw_path.with_suffix(".page_split.json")

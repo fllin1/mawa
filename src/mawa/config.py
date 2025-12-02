@@ -48,4 +48,4 @@ class City(enum.Enum):
 # Models
 MISTRAL_OCR_MODEL = "mistral-ocr-latest"
 GEMINI_FLASH_MODEL = "gemini-2.5-flash"
-GEMINI_PRO_MODEL = "gemini-2.5-pro"
+GEMINI_PRO_MODEL = "gemini-3-pro-preview"
