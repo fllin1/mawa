@@ -9,6 +9,7 @@ Extraction:
 import shutil
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 import typer
 from tqdm import tqdm
@@ -21,12 +22,15 @@ from mawa.config import (
     RAW_DATA_DIR,
     City,
 )
+from mawa.dataset import Dataset, Supabase
 from mawa.etl import Extraction, Transform
 from mawa.etl.table_utils import replace_tables_with_images
 from mawa.schemas.document_schema import Document
 from mawa.utils import read_json, save_json
 
 app = typer.Typer(help="CLI for the Bordeaux city")
+data = typer.Typer(help="Data management for Bordeaux")
+app.add_typer(data, name="data")
 
 CITY = City.BORDEAUX
 NUMBER_OF_ZONES = 181
@@ -119,7 +123,49 @@ def analyze_command() -> None:
     for file in tqdm(files, desc="Analyze", total=len(files)):
         analyze = Analyze(city=CITY, zone=file.stem)
         analyze.generate_analysis_plu()
-        analyze.format_analysis()
+        try:
+            analyze.format_analysis()
+        except KeyError:
+            print(f"KeyError for {file.stem}, skipping...")
+            continue
+
+
+# ============================================================================
+# DATA MANAGEMENT COMMANDS
+# ============================================================================
+
+
+@data.command("local-upsert")
+def data_local_upsert_command() -> None:
+    """Upsert Bordeaux dataset to local CSV files.
+
+    Saves documents to data/dataset_documents.csv and sources to data/dataset_sources.csv.
+    """
+    dataset = Dataset(CITY)
+    dataset.upsert_dataset()
+    typer.echo(f"Dataset upserted for {CITY.value}")
+
+
+@data.command("supabase-upsert")
+def data_supabase_upsert_command(
+    documents: bool = typer.Option(True, help="Upsert the documents dataset"),
+    sources: bool = typer.Option(True, help="Upsert the sources dataset"),
+    zone: Optional[str] = typer.Option(None, "--zone", "-z", help="Filter by zone"),
+    document_name: Optional[str] = typer.Option(
+        None, "--document-name", "-n", help="Filter by document name"
+    ),
+) -> None:
+    """Upsert Bordeaux dataset to Supabase database.
+
+    Upserts documents and/or sources tables. Use filters to target specific records.
+    """
+    supabase = Supabase()
+    if documents:
+        supabase.upsert_documents_dataset(CITY, zone)
+        typer.echo(f"Documents upserted for {CITY.value}")
+    if sources:
+        supabase.upsert_sources_dataset(CITY, document_name)
+        typer.echo(f"Sources upserted for {CITY.value}")
 
 
 if __name__ == "__main__":

@@ -104,7 +104,6 @@ class Analyze:
             date_of_document=self.doc.date_of_document,
             document_type=self.doc.document_type,
             city=self.city,
-            zoning=self.doc.zoning,
             zone=self.doc.zone,
             modified_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             model_metadata={k: v for k, v in json_response.items() if k != "parsed"},

@@ -147,7 +147,7 @@ class Transform:
 
     def pages_splitting(self, model: Optional[str] = "flash") -> None:
         """Transform the formatted OCR output in a standard format.
-        Extracts pages for each zone/zoning combination.
+        Extracts pages for each zone combination.
 
         Args:
             model (Optional[str]): The model to use for the Gemini model
@@ -165,11 +165,11 @@ class Transform:
         )
         json_response = response.model_dump()
 
-        self.page_split_path.mkdir(exist_ok=True, parents=True)
+        self.page_split_path.parent.mkdir(exist_ok=True, parents=True)
         save_json(json_response, self.page_split_path)
 
     def split_documents(self):
-        """Split the document into multiple documents based on the zoning and zone."""
+        """Split the document into multiple documents based on the zone."""
         document = read_json(self.raw_path)
         document = Document(**document)
 
@@ -179,7 +179,6 @@ class Transform:
         page_map = {page.index: page for page in document.pages}
 
         for page_split in page_splitting["parsed"]:
-            zoning = page_split["zoning"]
             zone = page_split["zone"]
             page_indices = page_split["pages"]
 
@@ -192,7 +191,7 @@ class Transform:
                 continue
 
             doc_zone = document.model_copy(
-                update={"pages": selected_pages, "zoning": zoning, "zone": zone}
+                update={"pages": selected_pages, "zone": zone}
             )
             save_path = self.interim_dir / f"{zone}.json"
             save_path.parent.mkdir(exist_ok=True, parents=True)

@@ -82,6 +82,7 @@ class Dataset:
 
         for file in self.analysis_data_dir.glob("*.analysis.json"):
             analysis = Analysis(**read_json(file))
+            analysis.model_metadata.pop("candidates", None)
             df_doc = self._add_doc_row(df_doc, analysis, has_dg)
             doc_count += 1
 

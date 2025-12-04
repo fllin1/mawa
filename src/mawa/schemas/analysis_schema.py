@@ -20,7 +20,6 @@ class Analysis(BaseModel):
         description="Le type de document"
     )
     city: str = Field(description="La ville du document")
-    zoning: Optional[str] = Field(description="Le zoning du document")
     zone: Optional[str] = Field(description="La zone du document")
     modified_at: Optional[str] = Field(
         description="La date de modification du document"

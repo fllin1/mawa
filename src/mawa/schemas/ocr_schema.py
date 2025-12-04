@@ -30,7 +30,6 @@ class DocumentOCR(BaseModel):
     date_of_document: str
     document_type: Literal["PLU", "DG", "PLU_AND_DG"]
     city: str
-    zoning: Optional[str] = None
     zone: Optional[str] = None
     modified_at: Optional[str] = None
     model_metadata: dict
